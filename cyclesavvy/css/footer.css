@@ -1,0 +1,141 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+.footer{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color:rgba(88,89,91,100%);
+    overflow: hidden;
+}
+
+.contain{
+    width: max(70%);
+    height: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    padding:0.2rem 0;
+}
+
+.fleft,.fcenter,.fright{
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    width: auto;
+    height: max(80%);
+}
+
+.fright{
+    flex-basis:5%;
+    justify-content: center;
+    flex-grow: 1;
+    margin: 0 0.5%;
+    padding:0px 0.5%;
+}
+
+.fcenter{
+    flex-basis: 75%;
+    justify-content: center;
+    flex-grow: 4;
+    margin: 0 0.2%;
+    padding:0px 0.2%;
+
+}
+
+.fleft{
+    flex-basis:20%;
+    justify-content: center;
+    flex-grow: 3;
+    margin: 0 0.5%;
+    padding:0px 0.5%;
+}
+
+.fleft > a{
+    color: white;
+}
+
+.fcenter > a{
+    color: white;
+}
+
+.fright > a{
+    color: white;
+}
+
+.fa{
+    color: white;
+    text-decoration: none;
+    font: normal 8px/1.5 arial;    
+}
+
+.ca{
+    margin: 0 1%;
+    padding: 0 1%;
+}
+
+@media only screen and (width<=780px) {
+   .footer{
+        justify-content: center;
+        width: 100%;
+    }
+    .contain{
+        display: grid;
+        gap: 1px;
+        justify-content: start;
+        justify-items: start;
+        align-content: center;
+        align-items: end;
+        width: 90%;
+    }
+
+    .fright{
+        order: 1;
+    }
+
+    .fleft{
+        order: 2;
+    }
+
+    .fcenter{
+        order: 3;
+        height: auto;
+        overflow: hidden;
+        width: auto;
+    }
+    .fleft,.fcenter,.fright{
+        margin: 0;
+        padding: 1px;
+    }
+
+    .fright{
+        margin: 5px 0 2px;
+    }
+
+    .fleft .fa{
+        font-weight: lighter;
+    }
+
+    .fcenter{
+        display: grid;
+        margin: 2px 0 5px;
+    }
+
+    .fa{
+        font-size: 12px;
+    }
+
+    .ca{
+        margin-left: 0;
+        margin-right: 5px;
+        padding-left: 0;
+        padding-right: 5px;
+        grid-row: 1/2;
+    }
+
+}
