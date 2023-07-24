@@ -212,13 +212,14 @@
                             
                                 <span onclick="document.getElementById('popsign').style.display='none'" class="close">&times;</span>
                                     <div class="form-container sign-up-container">
-                                <form action="#">
+                                <form method="post" action="#correct" onsubmit="return validateForm()">
                                     <h1>Create Account</h1>
                                 
-                                    <input type="text" placeholder="Name" />
-                                    <input type="email" placeholder="Email" />
-                                    <input type="password" placeholder="Password" />
+                                    <input type="text" placeholder="Name" id="name"  required="">
+                                    <input type="email" placeholder="Email" id="email">
+                                    <input type="password" placeholder="Password" id="password">
                                     <button>Sign Up</button>
+                                    <div id="errorMessages"></div>
                                 </form>
                             </div>
                             <div class="form-container sign-in-container">
@@ -275,10 +276,11 @@
         </div>
      </div>
 
+     <script src="js/validation.js"></script>
 
 <script>
 // mobile header start
-var prevScrollpos= window.pageYoffset;git
+var prevScrollpos= window.pageYoffset;
 document.addEventListener('scroll', function() {
     var width = document.documentElement.clientWidth;
 
