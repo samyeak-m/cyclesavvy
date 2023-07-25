@@ -76,7 +76,7 @@ input{
 	background: #e0dede;
 	justify-content: center;
 	display: flex;
-	margin: 20px auto;
+	margin: 10px auto;
 	padding: 10px;
 	border: none;
 	outline: none;
@@ -142,8 +142,14 @@ button:active{
 .error{
 	padding: 0;
 	margin: 0;
-	
 	color: red;
-	font: 14px 'poppins';
+	font: 12px 'poppins';
 	text-align: center;
+}
+
+.input-error {
+	border-bottom: 3px solid;
+	border-radius: 5px 5px 0 0;
+	border-color: red;
+	color: red;
 }

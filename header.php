@@ -215,12 +215,24 @@
                                 <form method="post" action="#correct" onsubmit="return validateForm()">
                                     <h1>Create Account</h1>
                                 
-                                    <input type="text" placeholder="Name" id="name">
+                                    <div class="form_group field">
+                                        <input type="input" class="form_field" placeholder="Name" id="name" oninput="clearError('name')" class="input-clear">
+                                        <label for="name" class="form_label">Name</label>
+                                    </div>
                                     <div id="nameError" class="error"></div>
-                                    <input type="email" placeholder="Email" id="email">
+
+                                    <div class="form_group field">
+                                    <input type="input" class="form_field" placeholder="Email" id="email" oninput="clearError('email')" class="input-clear">
+                                    <label for="email" class="form_label">Email</label>
                                     <div id="emailError" class="error"></div>
-                                    <input type="password" placeholder="Password" id="password">
+                                    </div>
+
+                                    <div class="form_group field">
+                                    <input type="password" class="form_field" placeholder="Password" id="password" oninput="clearError('password')" class="input-clear">
+                                    <label for="password" class="form_label">Password</label>
                                     <div id="passwordError" class="error"></div>
+                                    </div>
+
                                     <button>Sign Up</button>
                                 </form>
                             </div>
@@ -228,9 +240,19 @@
                                 <form action="#">
                                     <h1>Sign in</h1>
 
-                                    <input type="email" placeholder="Email" />
-                                    <input type="password" placeholder="Password" />
+                                    <div class="form_group field">
+                                    <input type="input" class="form_field" placeholder="Email" />
+                                    <label for="email" class="form_label">Email</label>
+                                    <div id="emailError" class="error"></div>
+                                    </div>
+
+                                    <div class="form_group field">
+                                    <input type="password" class="form_field" placeholder="Password" />
+                                    <label for="password" class="form_label">Password</label>
                                     <a class="fpsw" href="#">Forgot your password?</a>
+                                    <div id="emailError" class="error"></div>
+                                    </div>
+
                                     <button>Sign In</button>
                                 </form>
                             </div>

@@ -1,114 +1,109 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta content="width=device-width, initial-scale=1" name="viewport" />
-
-  <title>Scroll List with Animations</title>
-  <link rel="stylesheet" href="css/test.css">
-  </head>
+    <title>Form Validation</title>
+    <style>
+        /* CSS styles (same as previous code) */
+    </style>
+</head>
 <body>
+    <form name="myForm" onsubmit="return validateForm()">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" oninput="validateField('name')">
+        <div id="nameError" class="error"></div> <!-- Error message for the name -->
 
-<div class="product-v">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" oninput="validateField('email')">
+        <div id="emailError" class="error"></div> <!-- Error message for the email -->
 
-<a onclick="openModal()" style="width: auto;">
-<figure class="product-button">
-			<img src="https://cdn.shopify.com/s/files/1/0541/0154/1047/products/0711964_b_900x.jpg?v=1614971567" alt="one">
-			<figcaption><h4> Cycle Name </h4> <p>Rs 1,000</p></figcaption>
-		</figure>
-	</a>
-  <div id="product-pop" class="product-modal">
-    <div class="product-container product-animated" id="product-container">
-      <span onclick="closeModal()" class="product-close">&times;</span>
-      
-      <div class="product-view">
-        <div class="product-photo">
-          <img src="https://cdn.shopify.com/s/files/1/0541/0154/1047/products/0711964_b_900x.jpg?v=1614971567" alt="one">
-        </div>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" oninput="validateField('password')">
+        <div id="passwordError" class="error"></div> <!-- Error message for the password -->
 
-        <div class="product-detail">
-          <h2 class="product-head">Cycle Name</h2>
-          <p class="product-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores veniam minima harum blanditiis voluptas optio ipsum quibusdam molestiae ea voluptate tempore, amet dolorum aliquam incidunt natus voluptatem, molestias voluptates. Dolores illo unde quae repudiandae dolorum, quam consequatur impedit nobis obcaecati.</p>
-          
+        <input type="submit" value="Submit" id="submitBtn" disabled>
+    </form>
 
-          <div class="product-review">
-            
-            <div class="review-high">
-            <h4 class="review-user">Top user</h4>
+    <script>
+        // Function to validate an individual field and update error message
+        function validateField(fieldName) {
+            var field = document.getElementById(fieldName);
+            var errorDiv = document.getElementById(fieldName + "Error");
+            errorDiv.innerHTML = '';
+            field.classList.remove("input-error");
 
-              <div class="review-top">
-                <img src="photo/user.png" alt="top" class="top-img">
-                <h5 class="review-name">Name1</h5>
-              </div>
+            switch (fieldName) {
+                case "name":
+                    if (field.value.length < 8) {
+                        errorDiv.innerHTML = "Name must be at least 8 characters long.";
+                        field.classList.add("input-error");
+                        document.getElementById("submitBtn").disabled = false;
+                        } else {
+                            document.getElementById("submitBtn").disabled = true;
+                        }
+                    break;
 
-              <div class="review-top">
-                <img src="photo/user.png" alt="top" class="top-img">
-                <h5 class="review-name">Name2</h5>
-              </div>
-            </div>
+                case "email":
+                    var atposition = field.value.indexOf("@");
+                    var dotposition = field.value.lastIndexOf(".");
+                    if (atposition < 1 || dotposition < atposition + 2 || dotposition + 2 >= field.value.length) {
+                        errorDiv.innerHTML = "Please enter a valid email address.";
+                        field.classList.add("input-error");
+                        document.getElementById("submitBtn").disabled = false;
+                        } else {
+                            document.getElementById("submitBtn").disabled = true;
+                        }
+                    break;
 
-            <div class="review-low">
-            <h4 class="review-user">Aveage user</h4>
+                case "password":
+                    var password = field.value;
+                    if (password.length < 8) {
+                        errorDiv.innerHTML = "Password must be at least 8 characters long.";
+                        field.classList.add("input-error");
+                    } else {
+                        var conditionsMet = true;
+                        if (!/[A-Z]/.test(password)) {
+                            conditionsMet = false;
+                            errorDiv.innerHTML += "Password must contain at least one uppercase letter.<br>";
+                        }
+                        if (!/[a-z]/.test(password)) {
+                            conditionsMet = false;
+                            errorDiv.innerHTML += "Password must contain at least one lowercase letter.<br>";
+                        }
+                        if (!/\d/.test(password)) {
+                            conditionsMet = false;
+                            errorDiv.innerHTML += "Password must contain at least one numeric character.<br>";
+                        }
+                        if (!/[^a-zA-Z\d]/.test(password)) {
+                            conditionsMet = false;
+                            errorDiv.innerHTML += "Password must contain at least one special character.<br>";
+                        }
 
-              <div class="review-short">
-                <img src="photo/user.png" alt="short" class="review-img">
-                <h5 class="review-name">Name3</h5>
-              </div>
+                        if (conditionsMet) {
+                            document.getElementById("submitBtn").disabled = false;
+                        } else {
+                            document.getElementById("submitBtn").disabled = true;
+                        }
+                    }
+                    break;
 
-              <div class="review-short">
-                <img src="photo/user.png" alt="short" class="review-img">
-                <h5 class="review-name">Name4</h5>
-              </div>
-            
+                default:
+                    break;
+            }
+        }
 
-            </div>
-          </div>
-        
-          <div class="product-booking">
-            <h5 class="product-price">Rs 1,000</h5>
-            <button type="submit"><h3 class="product-book">Book Now</h3></button>
-          </div>
+        // Function to validate the entire form
+        function validateForm() {
+            // Call individual field validation to update error messages
+            validateField("name");
+            validateField("email");
+            validateField("password");
 
-        </div>
-      </div>
-    </div>
-  </div>
+            // Check if any errors exist
+            var errorsExist = document.querySelectorAll(".error").length > 0;
 
-  </div>
-
-  <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    var notBtn = document.querySelector(".product-v");
-    var width = document.documentElement.clientWidth;
-
-    function onResize(event) {
-      width = document.documentElement.clientWidth;
-    }
-
-    function onClick() {
-      if (width > 780) {
-        document.getElementById('product-pop').style.display = 'flex';
-      } else {
-        window.location.href = "productmobile.php";
-      }
-    }
-
-    notBtn.addEventListener("click", onClick);
-
-    var modal = document.getElementById('product-pop');
-
-    window.addEventListener("resize", function () {
-      notBtn.removeEventListener("click", onClick);
-      onResize();
-      notBtn.addEventListener("click", onClick);
-    });
-
-    window.addEventListener("click", function(event) {
-      if (event.target === modal || event.target.classList.contains("product-close")) {
-        modal.style.display = "none";
-      }
-    });
-  });
-</script>
-
-  </body>
+            // Return false to prevent form submission if there are errors
+            return !errorsExist;
+        }
+    </script>
+</body>
 </html>

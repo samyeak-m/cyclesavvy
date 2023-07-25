@@ -596,6 +596,8 @@ a:visited{
 .modal h1 {
 	font-weight: bold;
 	margin: 0;
+    font-size: 32px;
+     margin-bottom: 1rem;
 }
 
 .modal h2 {
@@ -630,6 +632,7 @@ a:visited{
 	letter-spacing: 1px;
 	text-transform: uppercase;
 	transition: transform 80ms ease-in;
+    margin: 1rem 0 0;
 }
 
 .modal button:active {
@@ -656,13 +659,47 @@ a:visited{
 	text-align: center;
 }
 
-.modal input {
-	background-color: #eee;
-	border: none;
-	padding: 12px 15px;
-	margin: 8px 0;
-	width: 100%;
-}
+.form_group {
+    position: relative;
+    padding: 15px 0 0;
+    width: 90%;
+    margin: 0 0 1rem;
+    }
+
+    .form_field {
+      width: 100%;
+      border: 0;
+      border-bottom: 2px solid rgba(88,89,91,100%);
+      background: transparent;
+      font-size: 1.3rem;
+      outline: 0;
+      color: black;
+      padding: 10px 15px 0 0;
+    }
+
+    .form_field::placeholder{
+      color: transparent;
+    }
+
+    .form_label{
+      position: absolute;
+      display: block;
+      top: 0;
+      font-size: 1rem;
+      color: #129948;
+      transition:.2s ease-in-out;
+    }
+    .form_field:placeholder-shown~.form_label{
+      top: 20px;
+      cursor: text;
+      color: rgba(88,89,91,100%);
+      font-size: 1.3rem;
+    }
+
+    .input-error {
+        border-color: red;
+        color: red;
+    }
 
 .container {
 	background-color: #fff;
@@ -832,6 +869,13 @@ a:visited{
 	from {transform: scale(0)} 
 	to {transform: scale(1)}
   }
+
+  .error{
+	padding: 0;
+	margin: 0;
+	color: red;
+	font: 14px 'poppins';
+}
   
 
 @media only screen and (width<=780px) {

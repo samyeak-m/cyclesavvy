@@ -2,17 +2,25 @@ function validateForm() {
     var name = document.getElementById("name").value;
     var email = document.getElementById("email").value;
     var password = document.getElementById("password").value;
+    var nameInput = document.getElementById("name");
+            var emailInput = document.getElementById("email");
+            var passwordInput = document.getElementById("password");
     var nameError = document.getElementById("nameError");
     var emailError = document.getElementById("emailError");
     var passwordError = document.getElementById("passwordError");
     var errorMessage = '';
+    
     nameError.innerHTML = '';
     emailError.innerHTML = '';
     passwordError.innerHTML = '';
+    nameInput.classList.remove("input-error");
+    emailInput.classList.remove("input-error");
+    passwordInput.classList.remove("input-error");
 
     if(name==''){
         errorMessage += "Name cannot be blank.<br>";
         nameError.innerHTML = errorMessage;
+        nameInput.classList.add("input-error");
         return false;
     }
 
@@ -22,23 +30,56 @@ function validateForm() {
     if (at < 1 || dot < at + 4 || dot + 3 >= email.length) {
         errorMessage += "Please enter a valid email address.<br>";
         emailError.innerHTML = errorMessage;
+        emailInput.classList.add("input-error");
         return false;
     }
 
-    // Validate password complexity (one uppercase, one lowercase, one numeric, one special character, and more than 8 characters)
-    var passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z\d]).{8,}$/;
-    if (!password.match(passwordRegex)) {
-        errorMessage += "Password requirement not fulfill";
+    // Validate password
+    if (password.length < 8) {
+        errorMessage += "Password must be at least 8 characters long.<br>";
         passwordError.innerHTML = errorMessage;
+        passwordInput.classList.add("input-error");
+        return false;
+    } else if (!/[A-Z]/.test(password)) {
+        errorMessage += "Password must contain at least one uppercase letter.<br>";
+        passwordError.innerHTML = errorMessage;
+        passwordInput.classList.add("input-error");
+        return false;
+    } else if (!/[a-z]/.test(password)) {
+        errorMessage += "Password must contain at least one lowercase letter.<br>";
+        passwordError.innerHTML = errorMessage;
+        passwordInput.classList.add("input-error");
+        return false;
+    } else if (!/\d/.test(password)) {
+        errorMessage += "Password must contain at least one numeric character.<br>";
+        passwordError.innerHTML = errorMessage;
+        passwordInput.classList.add("input-error");
+        return false;
+    } else if (!/[^a-zA-Z\d]/.test(password)) {
+        errorMessage += "Password must contain at least one special character.<br>";
+        passwordError.innerHTML = errorMessage;
+        passwordInput.classList.add("input-error");
         return false;
     }
 
      // Display error messages on the page
      if (errorMessage) {
-        errorMessages.innerHTML = errorMessage;
-        return false; // Prevent form submission
+        passwordError.innerHTML = errorMessage;
+        passwordInput.classList.add("input-error");
+        document.getElementById("submitBtn").disabled = true; // Disable submit button
+        return false;
     } else {
-        errorMessages.innerHTML = ''; // Clear any previous error messages
+        document.getElementById("submitBtn").disabled = false; // Enable submit button
         return true; // Allow form submission
+    }
+}
+
+// Function to clear error on input change
+function clearError(fieldName) {
+    var errorDiv = document.getElementById(fieldName + "Error");
+    var inputField = document.getElementById(fieldName);
+    if (inputField.classList.contains("input-error")) {
+        inputField.classList.remove("input-error");
+        errorDiv.innerHTML = "";
     }
 }

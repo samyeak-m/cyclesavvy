@@ -16,22 +16,28 @@
                 
 				<form method="post" action="#correct" onsubmit="return validateForm()">
 					<label for="chk" aria-hidden="true">Sign up</label>
-					<input type="text" name="txt" placeholder="Name" id="name">
+					
+					<input type="input" name="txt" placeholder="Name" id="name" oninput="clearError('name')" class="input-clear">
 					<div id="nameError" class="error"></div>
-					<input type="email" name="email" placeholder="Email" id="email">
+					
+					<input type="input" name="email" placeholder="Email" id="email" oninput="clearError('email')" class="input-clear">
 					<div id="emailError" class="error"></div>
-					<input type="password" name="pswd" placeholder="Password" id="password">
+					
+					<input type="password" name="pswd" placeholder="Password" id="password" oninput="clearError('password')" class="input-clear">
 					<div id="passwordError" class="error"></div>
-					<button class="signupbtn">Sign up</button>
-					<div id="errorMessages"></div>
+					
+					<button type="submit" value="Submit" id="submitBtn" class="signupbtn" >Sign up</button>
 				</form>
 			</div>
 
 			<div class="login" action="post">
 				<form>
 					<label for="chk" aria-hidden="true">Login</label>
-					<input type="email" name="email" placeholder="Email" required="">
+					
+					<input type="input" name="email" placeholder="Email" required="">
+					
 					<input type="password" name="pswd" placeholder="Password" required="">
+					
 					<button class="loginbtn">Login</button>
 				</form>
 			</div>
