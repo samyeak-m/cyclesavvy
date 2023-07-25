@@ -119,7 +119,6 @@ button:active{
 	height: 460px;
 	background: linear-gradient(to right, #057f36,#0bb44f);
     margin-top:10px ;
-	/* background: #eee; */
 	border-radius: 60% / 10%;
 	transform: translateY(-160px);
 	transition: .8s ease-in-out;
@@ -127,6 +126,7 @@ button:active{
 .login label{
 	color: #fff;
 	transform: scale(.6);
+	
 }
 
 #chk:checked ~ .login{
@@ -137,4 +137,13 @@ button:active{
 }
 #chk:checked ~ .signup label{
 	transform: scale(.6);
+}
+
+.error{
+	padding: 0;
+	margin: 0;
+	
+	color: red;
+	font: 14px 'poppins';
+	text-align: center;
 }

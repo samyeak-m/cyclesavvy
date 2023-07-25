@@ -16,9 +16,12 @@
                 
 				<form method="post" action="#correct" onsubmit="return validateForm()">
 					<label for="chk" aria-hidden="true">Sign up</label>
-					<input type="text" name="txt" placeholder="Name" id="name" required="">
+					<input type="text" name="txt" placeholder="Name" id="name">
+					<div id="nameError" class="error"></div>
 					<input type="email" name="email" placeholder="Email" id="email">
+					<div id="emailError" class="error"></div>
 					<input type="password" name="pswd" placeholder="Password" id="password">
+					<div id="passwordError" class="error"></div>
 					<button class="signupbtn">Sign up</button>
 					<div id="errorMessages"></div>
 				</form>

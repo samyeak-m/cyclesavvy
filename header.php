@@ -215,11 +215,13 @@
                                 <form method="post" action="#correct" onsubmit="return validateForm()">
                                     <h1>Create Account</h1>
                                 
-                                    <input type="text" placeholder="Name" id="name"  required="">
+                                    <input type="text" placeholder="Name" id="name">
+                                    <div id="nameError" class="error"></div>
                                     <input type="email" placeholder="Email" id="email">
+                                    <div id="emailError" class="error"></div>
                                     <input type="password" placeholder="Password" id="password">
+                                    <div id="passwordError" class="error"></div>
                                     <button>Sign Up</button>
-                                    <div id="errorMessages"></div>
                                 </form>
                             </div>
                             <div class="form-container sign-in-container">
