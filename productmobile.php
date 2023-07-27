@@ -41,7 +41,7 @@
 					</div>
 				</div>
 			</div>
-            <button type="submit"><h3 class="product-book">Book Now</h3></button>
+      <button type="submit" class="product-book-now-button"><h3 class="product-book">Book Now</h3></button>
           </div>
     
 
@@ -79,7 +79,7 @@
 </div>
 
 <script>
-    const dateInput = document.getElementById('date-input');
+const dateInput = document.getElementById('date-input');
 const calendar = document.getElementById('calendar');
 const calendarBody = calendar.querySelector('.calendar-body');
 const currentMonthYear = document.getElementById('current-month-year');
@@ -174,6 +174,14 @@ document.addEventListener('keydown', (event) => {
     calendar.style.display = 'none';
   }
 });
+
+const bookNowButtons = document.querySelectorAll('.product-book-now-button');
+
+bookNowButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        window.location.href = 'product.php';
+      });
+    });
 
 </script>
 
