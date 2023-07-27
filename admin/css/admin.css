@@ -152,6 +152,21 @@ th {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
+.addproduct,.saveproduct-btn{
+    display: flex;
+    flex-flow: row nowrap;
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 5px;
+    background-color: #007BFF;
+    border: none;
+    cursor: pointer;
+    color: white;
+    border-radius: 8px;
+}
+
 /* "Save Changes" button styling */
 .save-changes-button {
     background-color: #007BFF;

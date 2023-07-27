@@ -48,7 +48,7 @@ let products = [
           <textarea id="productDescription" placeholder="Product Description" required></textarea>
           <input type="file" id="productImage" accept="image/*">
         </div>
-        <button onclick="addProduct()">Add Product</button>
+        <button class="addproduct" onclick="addProduct()">Add Product</button>
       `;
     } else if (mode === "edit" && modalContent) {
       modalContentContainer.innerHTML = "";
@@ -97,7 +97,7 @@ let products = [
         <textarea id="editProductDescription" placeholder="Product Description" required>${product.description}</textarea>
         <input type="file" id="editProductImage" accept="image/*">
       </div>
-      <button onclick="saveProduct(${index})">Save Changes</button>
+      <button class="saveproduct-btn" onclick="saveProduct(${index})">Save Changes</button>
     `;
   
     openModal("edit", editModalContent);

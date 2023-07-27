@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Admin Panel - Product Management</h1>
+        <h1>Product Management</h1>
         <!-- "Add Product" button aligned to the right -->
         <button class="add-product-button" onclick="openModal('add')">+</button>
         <!-- The Modal for Adding and Editing -->
