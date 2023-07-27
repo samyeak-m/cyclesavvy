@@ -20,7 +20,8 @@ label,
 img,
 .msgBtn,
 .notBtn,
-.puBtn {
+.puBtn,
+.date-btn {
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
   -webkit-user-select: none; 

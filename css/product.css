@@ -22,7 +22,7 @@ figure {
   padding-block: 1rem 3rem;
   cursor: pointer;
   background-color: rgba(88, 89, 91, 0.03);
-  box-shadow: 0px 8px 7px -5px rgb(6 6 6/50%);
+  box-shadow: 0px 8px 7px -8px rgb(6 6 6/50%);
 }
 
 figure:hover {
@@ -192,9 +192,13 @@ figure:last-child {
 
 .product-booking button[type="submit"]:hover,
 .product-booking button[type="submit"]:focus {
-  background-color: white;
-  border-color: white;
-  color: #129948;
+  background-color: rgba(88,89,91,100%);
+  border-color: rgba(88,89,91,100%);
+  color: white;
+}
+
+#book-now-button {
+  cursor: pointer;
 }
 
 .product-book {
@@ -214,7 +218,7 @@ figure:last-child {
   border-radius: 10px;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   position: relative;
-  overflow: hidden;
+  overflow: scroll;
   width: 80vw;
   max-width: 1080px;
   height: 80vh;
@@ -276,6 +280,122 @@ figure:last-child {
   }
 }
 
+.datetime-picker {
+  display: inline-flex;
+}
+
+.date-picker {
+  position: relative;
+}
+
+.prev-btn,
+.next-btn {
+  border: none;
+  background-color: transparent;
+  position: absolute;
+  font-size: 16px;
+  cursor: pointer;
+  color: #129948;
+  font-weight: 800;
+
+}
+
+.prev-btn:hover,
+.next-btn:hover{
+  color: rgba(88,89,91,100%);
+
+}
+
+.prev-btn {
+left: 50px;
+}
+
+.next-btn {
+right: 50px;
+}
+
+.date-input {
+  padding: 5px 10px;
+  margin: 0 10px 10px 0;
+  border: 2px solid #129948;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: "poppins";
+  color: #333;
+}
+.date-input:hover,
+.date-input:focus{
+border-color: rgba(88,89,91,100%);
+}
+.calendar {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  border: 2px solid #129948;
+  border-radius: 8px;
+  background-color: #fff;
+  padding: 15px;
+  font-family: "poppins", sans-serif; /* Match your website's font */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 999; /* Ensure the date picker is on top of other elements */
+}
+
+.calendar-header {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  color: #129948; /* Match your website's highlight color */
+}
+
+.calendar-header span {
+  margin: 0 20px;
+}
+
+.calendar-body {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+}
+
+.calendar-day {
+  text-align: center;
+  line-height: 30px;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #333; /* Match your website's text color */
+}
+
+.calendar-day:hover {
+  background-color: #f2f2f2;
+}
+
+.disabled {
+  cursor: default;
+  opacity: 0.5; /* Past dates will have reduced opacity */
+}
+
+.today {
+  background-color: #eee;
+  color: #129948;
+}
+
+.selected {
+  background-color: #129948; /* Match your website's highlight color */
+  color: #fff;
+}
+
 @media only screen and (width<=780px) {
   .product {
       width: 90vw;
@@ -310,3 +430,4 @@ figure:last-child {
       width: 70%;
   }
 }
+

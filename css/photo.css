@@ -1,8 +1,8 @@
+/* all */
 *{
     margin: 0px;
     padding: 0px;
     scroll-behavior:smooth;
-    
 }
 
 /* scorllbar */
@@ -11,261 +11,430 @@
   display: none;
 }
 
-a,img {
-  -webkit-tap-highlight-color: transparent;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none; 
-  -moz-user-select: none; 
-  -ms-user-select: none; 
-  user-select: none;
-}
-
-/* body*/
-body{
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    overflow: hidden;
-}
-
-/* a tag */
-a{
-    text-decoration: none;
+  .main {
+    padding-top: 75px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+  }
+  
+  .product {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    width: 80vw;
+    gap: 2rem;
+    row-gap: 4rem;
+  }
+  
+  figure {
+    height: 200px;
+    width: 200px;
+    position: relative;
+    padding-inline: 2rem;
+    padding-block: 1rem 3rem;
+    cursor: pointer;
+    background-color: rgba(88, 89, 91, 0.03);
+    box-shadow: 0px 8px 7px -8px rgb(6 6 6/50%);
+  }
+  
+  figure:hover {
+    box-shadow: 0 8px 7px -5px rgba(0, 128, 0, 0.4);
+  }
+  
+  figure img {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 1.5/1;
+    object-fit: scale-down;
+    mix-blend-mode: multiply;
+  }
+  
+  figcaption {
+    position: absolute;
     color: black;
   }
   
-a:visited{
+  figcaption h4 {
+    font: 20px "poppins semibold";
+    font-weight: 600;
+    color: #129948;
+    margin-top: 1rem;
+  }
+  
+  figcaption p {
+    font: 14px "poppins";
+    font-weight: 500;
+    color: rgba(88, 89, 91, 100%);
+    padding: 0;
+    margin: 10px 0;
+  }
+  
+  figcaption h4:hover,
+  figcaption h4:focus,
+  figcaption p:hover,
+  figcaption p:focus {
     color: black;
   }
-
-.main{
-    overflow: scroll;
-    min-height: 100vh;
-    height: 100vh;
-    scroll-snap-type: y mandatory;
-}
-
-.main > .sect{
-    
-    min-height: 300px;
-    height: 100vh;
-    scroll-snap-align: start;
-}
-
-.sect{
+  
+  figure:last-child {
+    margin-bottom: 1rem;
+  }
+  
+  .product-view {
     display: flex;
-    flex-flow: column;
+    flex-direction: row;
+    flex-wrap: nowrap;
     justify-content: center;
     align-items: center;
+    width: 1050px;
+  }
+  
+  .product-photo {
+    width: 50%;
+    max-width: 450px;
+    height: auto;
+    justify-content: start;
+    margin-inline: 0 2rem;
+  }
+  
+  .product-photo > img {
+    width: 500px;
+    height: auto;
+    aspect-ratio: 1.5/1;
+    object-fit: scale-down;
+    mix-blend-mode: multiply;
+  }
+  
+  .product-detail {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: end;
+    align-items: start;
+  }
+  
+  .product-head {
+    font: 28px "poppins semibold";
+    color: #129948;
+    font-weight: 700;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 1rem;
+  }
+  
+  .product-desc {
+    font: 14px "poppins";
+    color: black;
+    font-weight: 500;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 1rem;
+    padding-right: 5rem;
+    text-align: justify;
+  }
+  
+  .product-review {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
     width: 100%;
-    background-repeat:no-repeat;
-    background-size: cover;
-    background-position: center;
-    font: 24px "Poppins SemiBold";
-}
-
-.sect.one{
-    background-color: blueviolet;
-}
-
-.sect.two{
-    background-color: red;
-}
-
-.sect.three{
-    background-color: gold;
-}
-
-.sect.four{
-    background-color: olive;
-}
-
-.animate{
-    filter: blur(5px);
-    transition: 1s ease-in-out;
-    opacity: 0;
-}
-
-.show-animation .animate {
-    filter: blur(0);
-    opacity: 1;
-}
-
-.sect .animate{
-    transform: scale(0.5);
-}
-
-.sect.show-animation .animate{
-    transform: scale(1);
-}
-
-.sect > h2{
-    position: relative;
-    top: -150px;
-}
-
-.sect > p{
-    position: relative;
-    top: -140px;
-}
-
-.sect > a >p{
-    position: relative;
-    bottom: -200px;
-    border: 2px solid black;
+    max-width: 300px;
+    justify-content: space-between;
+  }
+  
+  .review-high,
+  .review-low {
+    display: flex;
+    flex-flow: column nowrap;
+    margin: 0;
+    padding: 0;
+    margin-block: 1rem;
+  }
+  
+  .review-top,
+  .review-short {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    margin-block: 1rem;
+  }
+  
+  .product-review img {
+    width: 30px;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    margin-right: 0.5rem;
+  }
+  
+  .review-name {
+    font: 14px "poppins";
+    color: black;
+    font-weight: 600;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .product-booking {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .product-price {
+    font: 20px "poppins medium";
+    color: #129948;
+    font-weight: 700;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 1rem;
+    margin-left: 0.3rem;
+  }
+  
+  .product-booking button[type="submit"] {
+    font: 16px "poppins medium";
+    background-color: #129948;
+    border: 2px solid #129948;
     border-radius: 12px;
-    padding: 10px;
-
-}
-
-.sect > a >p:hover,.sect > a >p:focus{
-    color:red ;
+    color: white;
+    padding: 5px 10px;
+  }
+  
+  .product-booking button[type="submit"]:hover,
+  .product-booking button[type="submit"]:focus {
+    background-color: white;
+    border-color: white;
+    color: #129948;
+  }
+  
+  .product-book {
+    padding: 0;
+    margin: 0;
+  }
+  
+  .review-user {
+    font: 20px "poppins medium";
+    color: #129948;
+    font-weight: 600;
+    margin: 1rem 0;
+  }
+  
+  .product-container {
     background-color: #fff;
-    border: transparent;
-}  
-
-  .footer{
+    border-radius: 10px;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    position: relative;
+    overflow: scroll;
+    width: 80vw;
+    max-width: 1080px;
+    height: 80vh;
     display: flex;
+    justify-content: center;
+  }
+  
+  .product-modal {
+    display: none;
     flex-flow: row nowrap;
+    position: fixed;
+    z-index: 3;
+    left: 0;
+    top: 0;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    background-color:rgba(88,89,91,100%);
-    scroll-snap-align: start;
+    width: 100vw;
+    height: 100vh;
     overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(1px);
+  }
+  
+  .product-close {
+    position: absolute;
+    right: 25px;
+    top: 0;
+    color: #000;
+    font-size: 35px;
+    font-weight: bold;
+    z-index: 7;
+  }
+  
+  .product-close:hover,
+  .product-close:focus {
+    color: red;
+    cursor: pointer;
+  }
+  
+  .product-animated {
+    animation: animatezoom 0.6s;
+  }
+  
+  @-webkit-keyframes animatezoom {
+    from {
+        -webkit-transform: scale(0);
+    }
+    to {
+        -webkit-transform: scale(1);
+    }
+  }
+  
+  @keyframes animatezoom {
+    from {
+        transform: scale(0);
+    }
+    to {
+        transform: scale(1);
+    }
+  }
+
+  .datetime-picker {
+    display: inline-flex;
+  }
+  
+  .date-picker {
+    position: relative;
+  }
+
+  .prev-btn,
+.next-btn {
+    border: none;
+    background-color: transparent;
+    position: absolute;
+    font-size: 16px;
+    cursor: pointer;
+    color: #129948;
+    font-weight: 800;
+
 }
 
-.contain{
-    width: max(70%);
-    height: 100%;
+.prev-btn:hover,
+.next-btn:hover{
+    color: #000;
+
+}
+
+.prev-btn {
+  left: 50px;
+}
+
+.next-btn {
+  right: 50px;
+}
+  
+  .date-input {
+    padding: 5px 10px;
+    margin: 0 10px 10px 0;
+    border: 2px solid #129948;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: "poppins";
+    color: #333;
+  }
+  
+  .calendar {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    border: 2px solid #129948;
+    border-radius: 8px;
+    background-color: #fff;
+    padding: 15px;
+    font-family: "poppins", sans-serif; /* Match your website's font */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 999; /* Ensure the date picker is on top of other elements */
+  }
+  
+  .calendar-header {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 15px;
     display: flex;
-    flex-flow: row nowrap;
     justify-content: center;
     align-items: center;
-    padding:0.2rem 0;
-}
-
-.fleft,.fcenter,.fright{
+    font-size: 20px;
+    color: #129948; /* Match your website's highlight color */
+  }
+  
+  .calendar-header span {
+    margin: 0 20px;
+  }
+  
+  .calendar-body {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+  }
+  
+  .calendar-day {
+    text-align: center;
+    line-height: 30px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
     display: flex;
-    flex-flow: row nowrap;
+    justify-content: center;
     align-items: center;
-    width: auto;
-    height: max(80%);
-}
-
-.fright{
-    flex-basis:5%;
-    justify-content: center;
-    flex-grow: 1;
-    margin: 0 0.5%;
-    padding:0px 0.5%;
-}
-
-.fcenter{
-    flex-basis: 75%;
-    justify-content: center;
-    flex-grow: 4;
-    margin: 0 0.2%;
-    padding:0px 0.2%;
-
-}
-
-.fleft{
-    flex-basis:20%;
-    justify-content: center;
-    flex-grow: 3;
-    margin: 0 0.5%;
-    padding:0px 0.5%;
-}
-
-.fleft > a{
-    color: white;
-}
-
-.fcenter > a{
-    color: white;
-}
-
-.fright > a{
-    color: white;
-}
-
-.fa{
-    color: white;
-    text-decoration: none;
-    font: normal 8px/1.5 arial;    
-}
-
-.ca{
-    margin: 0 1%;
-    padding: 0 1%;
-}
-
-
-@media only screen and (width<=780px) {
-
-
-    .hide-header{
-        display: none;
+    color: #333; /* Match your website's text color */
+  }
+  
+  .calendar-day:hover {
+    background-color: #f2f2f2;
+  }
+  
+  .disabled {
+    cursor: default;
+    opacity: 0.5; /* Past dates will have reduced opacity */
+  }
+  
+  .today {
+    background-color: #eee;
+    color: #129948;
+  }
+  
+  .selected {
+    background-color: #129948; /* Match your website's highlight color */
+    color: #fff;
+  }
+  
+  @media only screen and (width<=780px) {
+    .product {
+        width: 90vw;
+        gap: 1rem;
+        row-gap: 2rem;
     }
-
-    .footer{
-        justify-content: center;
-        width: 100%;
+  
+    figure {
+        padding: 11px;
+        height: 20vh;
+        width: 37vw;
     }
-    .contain{
-        display: grid;
-        gap: 1px;
-        justify-content: start;
-        justify-items: start;
-        align-content: center;
-        align-items: end;
-        width: 90%;
+  
+    figure:hover {
+        box-shadow: 0px 8px 7px -5px rgb(6 6 6/50%);
     }
-
-    .fright{
-        order: 1;
-    }
-
-    .fleft{
-        order: 2;
-    }
-
-    .fcenter{
-        order: 3;
-        height: auto;
-        overflow: hidden;
-        width: auto;
-    }
-    .fleft,.fcenter,.fright{
+  
+    figcaption h4 {
         margin: 0;
-        padding: 1px;
+        margin-top: 1rem;
     }
-
-    .fright{
-        margin: 5px 0 2px;
+  
+    figcaption p {
+        margin: 0;
+        margin-top: 0.5rem;
     }
-
-    .fleft .fa{
-        font-weight: lighter;
+  
+    .box {
+        width: 70%;
     }
-
-    .fcenter{
-        display: grid;
-        margin: 2px 0 5px;
+    .popup {
+        width: 70%;
     }
-
-    .fa{
-        font-size: 12px;
-    }
-
-    .ca{
-        margin-left: 0;
-        margin-right: 5px;
-        padding-left: 0;
-        padding-right: 5px;
-        grid-row: 1/2;
-    }
-
-
-}
+  }
+  
+  
