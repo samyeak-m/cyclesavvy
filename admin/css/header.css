@@ -14,7 +14,13 @@ body{
     padding: 0;
 }
 a,
-input{
+input,
+button,
+p,
+h1,
+img,
+th,
+td{
     -webkit-tap-highlight-color: transparent;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -193,7 +199,6 @@ navbar{
     left: 0;
     top:50px;
     overflow: hidden;
-    /* background-color: rgba(0, 0, 0, 0.5); */
     background: rgba(116, 116, 116, 0.709);
 
   
@@ -207,13 +212,10 @@ navbar{
     height: 100vh;
     margin: -100px 0 0 -150px;
     padding: 125px 25px 25px;
-    /* background-color: rgba(255, 255, 255, 0.821);   */
-    background-color: rgba(255, 255, 255, 0.831);  
+     background-color: rgba(255, 255, 255, 0.831);  
     list-style-type: none;
     text-shadow: 1px 1px 2px rgba(168, 168, 168, 0.23);
-    transform-origin: 0 0;
-    transform: translateX(-100%, 0);
-    transition: 0.5s ease-in-out;
+    
     top: 90px;
 }
 
