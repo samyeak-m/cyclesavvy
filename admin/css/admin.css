@@ -1,30 +1,28 @@
 /* Reset default margin and padding */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f1f1f1;
-}
-
 .container {
-    max-width: 800px;
+    max-width: 80vw;
+    height: 85vh;
     margin: 20px auto;
     padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 0;
+    top: 90px;
+    border: 3px solid var(--primarycolor);
+    border-radius: 32px;
+    background-color: var(--headcolor);
+    box-shadow: 0 5px 15px -8px rgba(0, 0, 0, .5);
     position: relative;
+    overflow-y: scroll;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: start;
+    align-items:center;
 }
 
 .container h1 {
     text-align: center;
     margin-bottom: 20px;
-    color: #333;
+    color: var(--textcolor);
+    font: var(--headfont);
 }
 
 .product-form {
@@ -34,11 +32,11 @@ body {
 .product-form input,
 .product-form textarea,
 .product-form button {
-    display: block;
+    display: flex;
     width: 100%;
     margin-bottom: 10px;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--readcolor);
     border-radius: 5px;
 }
 
@@ -47,18 +45,21 @@ body {
 }
 
 .product-form button {
-    background-color: #4CAF50;
-    color: white;
+    background-color: var(--primarycolor);
+    color: var(--captioncolor);
     cursor: pointer;
     transition: background-color 0.2s;
 }
 
 .product-form button:hover {
-    background-color: #45a049;
+    background-color: var(--primarycolor);
 }
 
 .product-table {
+    background-color: var(--headcolor);
     overflow-x: auto;
+    height: auto;
+    width: 75vw;
 }
 
 table {
@@ -66,14 +67,22 @@ table {
     border-collapse: collapse;
 }
 
+
 th, td {
     padding: 12px;
     text-align: left;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid var(--readcolor);
 }
 
 th {
-    background-color: #f2f2f2;
+    background-color: var(--primarycolor);
+    color: var(--captioncolor);
+    font: var(--menufont);
+}
+
+tbody{
+    background-color:var(--headcolor);
+    font: var(--parafont);
 }
 
 .product-item img {
@@ -130,11 +139,11 @@ th {
 /* "Add Product" button styling */
 .add-product-button {
     position: absolute;
-    top: 20px;
+    top: 25px;
     right: 20px;
     width: 40px;
     height: 40px;
-    background-color: #007BFF;
+    background-color: var(--buttoncolor);
     border: none;
     border-radius: 50%;
     cursor: pointer;
@@ -148,7 +157,7 @@ th {
 }
 
 .add-product-button:hover {
-    background-color: #0056b3;
+    background-color:var(--primarycolor);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
@@ -160,16 +169,64 @@ th {
     justify-content: center;
     align-items: center;
     padding: 8px 5px;
-    background-color: #007BFF;
+    background-color: var(--buttoncolor);
     border: none;
     cursor: pointer;
     color: white;
     border-radius: 8px;
 }
 
+.adminproduct-image{
+    height: 50px;
+    width: 50px;
+
+}
+
+.adminproduct-name p{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 150px;
+
+}
+
+.adminproduct-price{
+    width: 50px;
+}
+
+.adminproduct-detail p{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 550px;
+}
+
+.updatebtn{
+    color: white;
+    border-radius: 8px;
+    padding: 8px 10px;
+    cursor: pointer;
+
+}
+
+.edit-product{
+    background-color: var(--primarycolor);
+    border: 2px solid var(--primarycolor);
+}
+
+.delete-product{
+    background-color: red;
+    border: 2px solid red;
+}
+
+.edit-product:hover,.delete-product:hover{
+    background-color: var(--textcolor);
+    border-color: var(--textcolor);
+}
+
 /* "Save Changes" button styling */
 .save-changes-button {
-    background-color: #007BFF;
+    background-color: var(--buttoncolor);
     color: white;
     border: none;
     padding: 12px;
@@ -181,5 +238,5 @@ th {
 }
 
 .save-changes-button:hover {
-    background-color: #0056b3;
+    background-color: var(--buttoncolor);
 }

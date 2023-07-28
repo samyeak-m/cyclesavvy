@@ -1,12 +1,15 @@
-<!DOCTYPE html>
+<?php
+$currentPage = 'product';
+include("header.php");
+?>
 <html>
 <head>
-    <title>Admin Panel</title>
     <style>
        <?php include "css/admin.css"; ?>
     </style>
 </head>
 <body>
+
     <div class="container">
         <h1>Product Management</h1>
         <!-- "Add Product" button aligned to the right -->
@@ -34,20 +37,20 @@
                 <tbody id="productList">
                     <!-- Example Product Details -->
                     <tr>
-                        <td><img src="example-product1.jpg" alt="Product 1"></td>
-                        <td>Product 1</td>
-                        <td>$19.99</td>
-                        <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
-                        <td><button onclick="editProduct(0)">Edit</button></td>
-                        <td><button onclick="deleteProduct(0)">Delete</button></td>
+                        <td><img class="adminproduct-image" src="../photo/user.png" alt="Product 1"></td>
+                        <td class="adminproduct-name"><p>Product 1</p></td>
+                        <td class="adminproduct-price">$19.99</td>
+                        <td class="adminproduct-detail"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p></td>
+                        <td><button class="edit-product updatebtn" onclick="editProduct(this)">Edit</button></td>
+                        <td><button class="delete-product updatebtn" onclick="deleteProduct(this)">Delete</button></td>
                     </tr>
                     <tr>
-                        <td><img src="example-product2.jpg" alt="Product 2"></td>
-                        <td>Product 2</td>
-                        <td>$24.99</td>
-                        <td>Vestibulum vulputate turpis eu dictum fermentum.</td>
-                        <td><button onclick="editProduct(1)">Edit</button></td>
-                        <td><button onclick="deleteProduct(1)">Delete</button></td>
+                        <td><img class="adminproduct-image" src="../photo/user.png" alt="Product 2"></td>
+                        <td class="adminproduct-name"><p>Product 2</p></td>
+                        <td class="adminproduct-price">$24.99</td>
+                        <td class="adminproduct-detail"><p>Vestibulum vulputate turpis eu dictum fermentum.</p></td>
+                        <td><button class="edit-product updatebtn" onclick="editProduct(this)">Edit</button></td>
+                        <td><button class="delete-product updatebtn" onclick="deleteProduct(this)">Delete</button></td>
                     </tr>
                     <!-- End of Example Product Details -->
                 </tbody>
