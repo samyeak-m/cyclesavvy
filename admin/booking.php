@@ -1,5 +1,5 @@
 <?php
-$currentPage = 'notification';
+$currentPage = 'booking';
 include("header.php");
 ?>
 
@@ -9,14 +9,14 @@ include("header.php");
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
 <head>
 <style>  
-        <?php include "css/notification.css"; ?>
+        <?php include "css/booking.css"; ?>
 </style>
 </head>
 <body>
     <div class="nothead">
         <div class="notbody">        
             <div class="nottitle">
-                <h1>Notifications</h1>
+                <h1>Cycle Booked</h1>
             </div>
 
             <div class="nottext">

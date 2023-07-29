@@ -1,0 +1,310 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    scroll-behavior:smooth;
+    box-sizing: border-box;
+}
+
+*::-webkit-scrollbar
+{
+    display: none;
+}
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'poppins';
+}
+a,
+input,
+button,
+p,
+h1,
+img,
+th,
+td{
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.container {
+    max-width: 80vw;
+    height: 95vh;
+    margin: 20px auto;
+    padding: 20px;
+    top: 10px;
+    border: 3px solid #0056b3;
+    border-radius: 32px;
+    background-color: white;
+    box-shadow: 0 5px 15px -8px rgba(0, 0, 0, .5);
+    position: relative;
+    overflow-y: scroll;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: start;
+    align-items:center;
+}
+
+.container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #007bff;
+    font-weight: 700;
+    font-size: 28px;
+}
+
+.admin-table {
+    background-color: #f0f0f0;
+    overflow-x: auto;
+    height: auto;
+    width: 8000px;
+    max-width: 100%;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #d3d3d3;
+}
+
+th {
+    background-color: #007bff;
+    color: #fff;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+tbody {
+    background-color: #f0f0f0;
+}
+
+.admin-name p,
+.admin-email p,
+.admin-phone p,
+.admin-address p {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 150px;
+}
+
+.delete-admin {
+    background-color: #e74c3c;
+    border: 2px solid #e74c3c;
+    border-radius: 8px;
+    padding: 5px 8px;
+    color: white;
+}
+
+
+.delete-admin:hover {
+    background-color: #333;
+    border-color: #333;
+}
+
+.saveadmin{
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    margin-top: 15px;
+
+}
+
+.saveadmin:hover{
+    background-color: #0056b3;
+}
+
+/* Modal Styling */
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    position: relative;
+    max-width: 600px;
+    margin: 100px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+}
+
+.close {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+    padding: 8px;
+    font-size: 32px;
+    color: #d32f2f;
+}
+
+/* "Add Admin" button styling */
+.add-admin-button {
+    position: absolute;
+    top: 25px;
+    right: 20px;
+    width: 125px;
+    height: 40px;
+    padding: 5px 8px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-transform: uppercase;
+}
+
+.add-admin-button:hover {
+    background-color: black;
+    color: #ccc;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+#addAdminModal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+#addAdminForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+#addAdminForm input,
+#addAdminForm button {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+#addAdminForm input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+#addAdminForm input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+#addAdminForm input[type="text"],
+#addAdminForm input[type="password"] {
+    background-color: #f5f5f5;
+}
+
+#addAdminForm h2 {
+    margin-bottom: 20px;
+    color: #007bff;
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+}
+
+#addAdminForm .form-label {
+    text-align: left;
+    margin-bottom: 5px;
+    color: #333;
+    font-size: 16px;
+}
+
+@media only screen and (width<=780px) {
+    .container{
+        max-width: 95vw;
+        height: 85vh;
+        top: 10px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+
+    .container h1{
+        font-size: 24px;
+        margin-bottom: 50px;
+    }
+
+    .add-admin-button{
+        top: 55px;
+        padding: 8px 10px;
+        font-size: 12px;
+        width: auto;
+        height: auto;
+    }
+
+    .modal-content{
+        margin: 150px 25px;
+    }
+
+    .close{
+        font-size: 28px;
+        top: -5px;
+        right: 8px;
+    }
+
+    .admin-table{
+        max-width: 90vw;
+    }
+
+    th,td{
+        padding: 10px 5px;
+        font-size: 14px;
+    }
+
+    .admin-email p,
+    .admin-name p,
+    .admin-phone p,
+    .admin-address p{
+        font-size: 12px;
+        font-weight: 600;
+        min-width: 40px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        max-width: 65px;
+
+    }
+
+    .adminproduct-image{
+        width: 30px;
+        height: 30px;
+    }
+
+    .updatebtn{
+        font-size: 10px;
+        font-weight: 600;
+        padding: 5px 7px;
+    }
+    
+}

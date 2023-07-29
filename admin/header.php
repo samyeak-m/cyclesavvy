@@ -25,7 +25,13 @@
         <a class="anav message <?php if ($currentPage === 'chat') echo 'active'; ?>" href="message.php">Message</a>
         <a class="anav notification <?php if ($currentPage === 'notification') echo 'active'; ?>" href="notification.php">Notification</a>
         <a class="anav contact <?php if ($currentPage === 'contact') echo 'active'; ?> " href="contact.php">Contact us</a>
-        <a class="anav logout" href="login.php">Log Out</a>
+        <div class="profile-dropdown">
+    <a class="anav profile-btn" href="#">Profile</a>
+    <div class="profile-dropdown-content">
+      <a class="anav" href="editadmin.php">Edit Profile</a>
+      <a class="anav" href="login.php">Logout</a>
+    </div>
+  </div>
 
     </div>
 
@@ -43,9 +49,10 @@
         
             <div class="menu-list">
             <a class="anav <?php if ($currentPage === 'product') echo 'active'; ?>" href="index.php"><li>Product</li></a>
+            <a class="anav <?php if ($currentPage === 'booking') echo 'active'; ?>" href="booking.php"><li>Booking</li></a>
             <a class="anav <?php if ($currentPage === 'chat') echo 'active'; ?>" href="admin-chat.php"><li>Message</li></a>
-            <a class="anav <?php if ($currentPage === 'notification') echo 'active'; ?>" href="notification.php"><li>Notification</li></a>
             <a class="anav <?php if ($currentPage === 'contact') echo 'active'; ?>" href="contact.php"><li>Contact us</li></a>
+            <a class="anav <?php if ($currentPage === 'edit') echo 'active'; ?>" href="editadmin.php"><li>Edit Profile</li></a>
             <a class="anav" href="login.php"><li>Log Out</li></a>
             </div>        
     </div>
