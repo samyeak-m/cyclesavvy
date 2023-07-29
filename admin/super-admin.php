@@ -102,7 +102,7 @@
             <td class="admin-name"><p>${adminName}</p></td>
             <td class="admin-email"><p>${adminEmail}</p></td>
             <td class="admin-phone"><p>${adminPhone}</p></td>
-            <td class="admin-address"><p>${adminAddress</p>}</td>
+            <td class="admin-address"><p>${adminAddress}</p></td>
             <td><button class="delete-admin updatebtn" onclick="deleteAdmin(this)">Delete</button></td>
         `;
         adminList.appendChild(newRow);
