@@ -8,8 +8,8 @@
 .product {
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-between;
-  width: 80vw;
+  justify-content: start;
+  width: 70vw;
   gap: 2rem;
   row-gap: 4rem;
 }
@@ -79,11 +79,14 @@ figure:last-child {
 }
 
 .product-photo {
-  width: 50%;
+  flex-basis:25%;
+  display: flex;
+  width: 100%;
   max-width: 450px;
   height: auto;
   justify-content: start;
   margin-inline: 0 2rem;
+  margin: 0 20px 2rem 1rem;
 }
 
 .product-photo > img {
@@ -94,11 +97,16 @@ figure:last-child {
   mix-blend-mode: multiply;
 }
 
+.product-wapper{
+  flex-basis:65%;
+  display: flex;
+  justify-content: center;
+}
+
 .product-detail {
   display: flex;
   flex-flow: column nowrap;
-  justify-content: end;
-  align-items: start;
+  
 }
 
 .product-head {

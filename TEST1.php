@@ -1,109 +1,59 @@
-<!DOCTYPE html>
+
 <html>
 <head>
-    <title>Form Validation</title>
     <style>
-        /* CSS styles (same as previous code) */
+       <?php include "css/test.css"; ?>
     </style>
 </head>
 <body>
-    <form name="myForm" onsubmit="return validateForm()">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" oninput="validateField('name')">
-        <div id="nameError" class="error"></div> <!-- Error message for the name -->
 
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" oninput="validateField('email')">
-        <div id="emailError" class="error"></div> <!-- Error message for the email -->
-
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" oninput="validateField('password')">
-        <div id="passwordError" class="error"></div> <!-- Error message for the password -->
-
-        <input type="submit" value="Submit" id="submitBtn" disabled>
-    </form>
-
-    <script>
-        // Function to validate an individual field and update error message
-        function validateField(fieldName) {
-            var field = document.getElementById(fieldName);
-            var errorDiv = document.getElementById(fieldName + "Error");
-            errorDiv.innerHTML = '';
-            field.classList.remove("input-error");
-
-            switch (fieldName) {
-                case "name":
-                    if (field.value.length < 8) {
-                        errorDiv.innerHTML = "Name must be at least 8 characters long.";
-                        field.classList.add("input-error");
-                        document.getElementById("submitBtn").disabled = false;
-                        } else {
-                            document.getElementById("submitBtn").disabled = true;
-                        }
-                    break;
-
-                case "email":
-                    var atposition = field.value.indexOf("@");
-                    var dotposition = field.value.lastIndexOf(".");
-                    if (atposition < 1 || dotposition < atposition + 2 || dotposition + 2 >= field.value.length) {
-                        errorDiv.innerHTML = "Please enter a valid email address.";
-                        field.classList.add("input-error");
-                        document.getElementById("submitBtn").disabled = false;
-                        } else {
-                            document.getElementById("submitBtn").disabled = true;
-                        }
-                    break;
-
-                case "password":
-                    var password = field.value;
-                    if (password.length < 8) {
-                        errorDiv.innerHTML = "Password must be at least 8 characters long.";
-                        field.classList.add("input-error");
-                    } else {
-                        var conditionsMet = true;
-                        if (!/[A-Z]/.test(password)) {
-                            conditionsMet = false;
-                            errorDiv.innerHTML += "Password must contain at least one uppercase letter.<br>";
-                        }
-                        if (!/[a-z]/.test(password)) {
-                            conditionsMet = false;
-                            errorDiv.innerHTML += "Password must contain at least one lowercase letter.<br>";
-                        }
-                        if (!/\d/.test(password)) {
-                            conditionsMet = false;
-                            errorDiv.innerHTML += "Password must contain at least one numeric character.<br>";
-                        }
-                        if (!/[^a-zA-Z\d]/.test(password)) {
-                            conditionsMet = false;
-                            errorDiv.innerHTML += "Password must contain at least one special character.<br>";
-                        }
-
-                        if (conditionsMet) {
-                            document.getElementById("submitBtn").disabled = false;
-                        } else {
-                            document.getElementById("submitBtn").disabled = true;
-                        }
-                    }
-                    break;
-
-                default:
-                    break;
-            }
-        }
-
-        // Function to validate the entire form
-        function validateForm() {
-            // Call individual field validation to update error messages
-            validateField("name");
-            validateField("email");
-            validateField("password");
-
-            // Check if any errors exist
-            var errorsExist = document.querySelectorAll(".error").length > 0;
-
-            // Return false to prevent form submission if there are errors
-            return !errorsExist;
-        }
-    </script>
+    <div class="container">
+        <h1>Product Management</h1>
+        <!-- "Add Product" button aligned to the right -->
+        <button class="add-product-button" onclick="openModal('add')">+</button>
+        <!-- The Modal for Adding and Editing -->
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <div id="modalContent"></div>
+            </div>
+        </div>
+        <div class="product-table">
+            <table>
+                <!-- Table headers -->
+                <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Description</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody id="productList">
+                    <!-- Example Product Details -->
+                    <tr>
+                        <td><img class="adminproduct-image" src="../photo/user.png" alt="Product 1"></td>
+                        <td class="adminproduct-name"><p>Product 1</p></td>
+                        <td class="adminproduct-price">$19.99</td>
+                        <td class="adminproduct-detail"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p></td>
+                        <td><button class="edit-product updatebtn" onclick="editProduct(this)">Edit</button></td>
+                        <td><button class="delete-product updatebtn" onclick="deleteProduct(this)">Delete</button></td>
+                    </tr>
+                    <tr>
+                        <td><img class="adminproduct-image" src="../photo/user.png" alt="Product 2"></td>
+                        <td class="adminproduct-name"><p>Product 2</p></td>
+                        <td class="adminproduct-price">$24.99</td>
+                        <td class="adminproduct-detail"><p>Vestibulum vulputate turpis eu dictum fermentum.</p></td>
+                        <td><button class="edit-product updatebtn" onclick="editProduct(this)">Edit</button></td>
+                        <td><button class="delete-product updatebtn" onclick="deleteProduct(this)">Delete</button></td>
+                    </tr>
+                    <!-- End of Example Product Details -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="js/chatgpt.js"></script>
 </body>
 </html>

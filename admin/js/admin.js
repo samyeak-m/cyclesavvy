@@ -1,5 +1,3 @@
-// Sample product data (replace this with actual product data from the server)
-let products = [];
 
 // Function to pull data from the HTML table and update the products array
 function pullDataFromTable() {
@@ -46,14 +44,16 @@ function openModal(mode, modalContent = null) {
 
   if (mode === "add") {
     modalContentContainer.innerHTML = `
+    <form method="post"id="myform" action="saveItem.php" enctype="multipart/form-data">
       <h2>Add Product</h2>
       <div class="product-form">
-        <input type="text" id="productName" placeholder="Product Name" required>
-        <input type="number" id="productPrice" placeholder="Price" required>
-        <textarea id="productDescription" placeholder="Product Description" required></textarea>
-        <input type="file" id="productImage" accept="image/*">
+        <input type="text" id="productName" name="name" placeholder="Product Name" required>
+        <input type="number" id="productPrice" name="price" placeholder="Price" required>
+        <textarea id="productDescription" name="description" placeholder="Product Description" required></textarea>
+        <input type="file" id="productImage" name="photo" accept="image/*">
       </div>
       <button class="addproduct" onclick="addProduct()">Add Product</button>
+      </form>
     `;
   } else if (mode === "edit" && modalContent) {
     modalContentContainer.innerHTML = "";
@@ -92,21 +92,39 @@ function addProduct() {
 
 // Function to edit a product
 function editProduct(index) {
+  console.log(index);
+  $sid=index;
+
   const product = products[index];
   const editModalContent = document.createElement("div");
   editModalContent.innerHTML = `
-    <h2>Edit Product</h2>
-    <div class="product-form">
-      <input type="text" id="editProductName" placeholder="Product Name" value="${product.name}" required>
-      <input type="number" id="editProductPrice" placeholder="Price" value="${product.price}" required>
-      <textarea id="editProductDescription" placeholder="Product Description" required>${product.description}</textarea>
-      <input type="file" id="editProductImage" accept="image/*">
-    </div>
-    <button class="saveproduct-btn" onclick="saveProduct(${index})">Save Changes</button>
+
+  <?php
+
+$id=$_GET['index'];
+include "../dbconnect.php";
+$q="select * from tbl_inventory where stk_id=$id";
+$result=mysqli_query($con,$q);
+$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
+
+?>
+
+    <form method="post" id="myform" action="updateitem.php" enctype="multipart/form-data">
+      <h2>Edit Product</h2>
+      <div class="product-form">
+        <input type="text" name="name" placeholder="Product Name" value="${product.name}" required>
+        <input type="number" name="price" placeholder="Price" value="${product.price}" required>
+        <textarea name="description" placeholder="Product Description" required>${product.description}</textarea>
+        <input type="file" name="photo" accept="image/*">
+      </div>
+      <input type="text" name="id" value="${index}">
+      <button type="submit" class="saveproduct-btn">Save Changes</button>
+    </form>
   `;
 
   openModal("edit", editModalContent);
 }
+
 
 // Function to save changes to a product
 function saveProduct(index) {
@@ -130,14 +148,5 @@ function saveProduct(index) {
   }
 }
 
-// Function to delete a product
-function deleteProduct(index) {
-  if (confirm("Are you sure you want to delete this product?")) {
-    products.splice(index, 1);
-    displayProducts();
-  }
-}
-
-// Display initial products on page load
 pullDataFromTable();
 displayProducts();

@@ -59,6 +59,7 @@ function validateField(fieldName) {
     }
 }
 
+
 // Function to validate the entire form
 function validateForm() {
     // Call individual field validation to update error messages

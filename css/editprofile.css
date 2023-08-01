@@ -1,0 +1,93 @@
+body {
+    font-family: 'poppins';
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+  }
+
+  a,
+input,
+button,
+p,
+h1,
+img,
+th,
+td,
+span{
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.edit-admin{
+    padding-top: 100px;
+}
+  
+  .container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1 {
+    text-align: center;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="password"] {
+    width: 375px;
+    max-width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  button {
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  .password-toggle {
+    font-size: 12px;
+    cursor: pointer;
+    color: #007bff;
+    display: block;
+    margin-top: 5px;
+  }
+  
+  @media only screen and (width <= 769px) {
+
+    .container{
+        margin-inline:25px;
+    }
+
+    input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="password"] {
+    width: 275px;
+  }
+
+  }

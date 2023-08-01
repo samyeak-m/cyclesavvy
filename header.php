@@ -1,3 +1,25 @@
+<?php 
+session_start();
+$username = "no-user";
+
+
+if (!isset($_SESSION['name'])) {
+    $displayAuser = "none";
+    $displayUprofile = "flex";
+} else {
+    $username = $_SESSION['name'];
+    $displayAuser = "flex";
+    $displayUprofile = "none";
+}
+
+if (isset($_GET['error'])) {
+    echo '<script>alert("Either username or password is wrong");</script>';
+    echo '<script>window.history.replaceState(null, null, window.location.href.split("?")[0]);</script>';
+
+}
+
+ ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -202,8 +224,8 @@
 
                     <div class = "pbox">
                         <div class = "ndisplay">
-                        <div class="uprofile">
-                        <a href="#profile" class="uimg"><img src="photo/user.png" alt="User Profile"></a>
+                        <div class="uprofile" id="uprofile" style="display: <?php echo $displayUprofile; ?>">
+                        <a class="uimg" onclick="document.getElementById('popsign').style.display='flex'" style="width:auto;"><img src="photo/user.png" alt="User Profile"></a>
 
                         <div class="notsign">
                             <a class="popbtn" onclick="document.getElementById('popsign').style.display='flex'" style="width:auto;">Login</a>
@@ -212,23 +234,23 @@
                             
                                 <span onclick="document.getElementById('popsign').style.display='none'" class="close">&times;</span>
                                     <div class="form-container sign-up-container">
-                                <form method="post" action="#correct" onsubmit="return validateForm()">
+                                <form method="post"id="myform" action="saveuser.php" enctype="multipart/form-data" onsubmit="return validateForm()">
                                     <h1>Create Account</h1>
                                 
                                     <div class="form_group field">
-                                        <input type="input" class="form_field" placeholder="Name" id="name" oninput="clearError('name')" class="input-clear">
+                                        <input type="input" name="name" class="form_field" placeholder="Name" id="name" oninput="clearError('name')" class="input-clear">
                                         <label for="name" class="form_label">Name</label>
                                     </div>
                                     <div id="nameError" class="error"></div>
 
                                     <div class="form_group field">
-                                    <input type="input" class="form_field" placeholder="Email" id="email" oninput="clearError('email')" class="input-clear">
+                                    <input type="input" name="email" class="form_field" placeholder="Email" id="email" oninput="clearError('email')" class="input-clear">
                                     <label for="email" class="form_label">Email</label>
                                     <div id="emailError" class="error"></div>
                                     </div>
 
                                     <div class="form_group field">
-                                    <input type="password" class="form_field" placeholder="Password" id="password" oninput="clearError('password')" class="input-clear">
+                                    <input type="password" name="password" class="form_field" placeholder="Password" id="password" oninput="clearError('password')" class="input-clear">
                                     <label for="password" class="form_label">Password</label>
                                     <div id="passwordError" class="error"></div>
                                     </div>
@@ -237,20 +259,19 @@
                                 </form>
                             </div>
                             <div class="form-container sign-in-container">
-                                <form action="#">
+                                <form action="logincheck.php" method="post">
                                     <h1>Sign in</h1>
 
                                     <div class="form_group field">
-                                    <input type="input" class="form_field" placeholder="Email" />
+                                    <input type="input" name="email" class="form_field" placeholder="Email" required/>
                                     <label for="email" class="form_label">Email</label>
-                                    <div id="emailError" class="error"></div>
                                     </div>
 
                                     <div class="form_group field">
-                                    <input type="password" class="form_field" placeholder="Password" />
+                                    <input type="password" name="password" id="log_password"class="form_field" placeholder="Password" required/>
                                     <label for="password" class="form_label">Password</label>
                                     <a class="fpsw" href="#">Forgot your password?</a>
-                                    <div id="emailError" class="error"></div>
+
                                     </div>
 
                                     <button>Sign In</button>
@@ -274,20 +295,18 @@
                         </div>
                             </div>
 
-
-
                             <div class="uname">
-                                <p>User Name</p>
+                                <p><?php echo $username; ?></p>
                             </div>
 
                             </div> 
                             
-                            <div class="auser">
+                            <div class="auser" id="auser" style="display: <?php echo $displayAuser; ?>">
                                     <div class="activities">
-                                        <a href = "#">My Orders</a>
+                                        <a href = "#">Whislist</a>
                                         <a href = "#">My Booking</a>
-                                        <a href = "#">Change Password</a>
-                                        <a href = "#">Log out </a>
+                                        <a href = "editprofile.php?id=$id">Edit Profile</a>
+                                        <a href = "logout.php">Log out </a>
                                     </div>
                                 </div>
                                 
@@ -518,6 +537,9 @@ window.onclick = function(event) {
         modal.style.display = "none";
     }
 }
+
+const urlParams = new URLSearchParams(window.location.search);
+const error = urlParams.get('error');
 
 </script>
 
