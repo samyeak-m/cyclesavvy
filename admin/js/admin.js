@@ -1,40 +1,6 @@
 
 // Function to pull data from the HTML table and update the products array
-function pullDataFromTable() {
-  const productList = document.getElementById("productList");
-  products = [];
 
-  const rows = productList.getElementsByTagName("tr");
-  for (const row of rows) {
-    const cells = row.getElementsByTagName("td");
-    const product = {
-      image: cells[0].querySelector("img").src,
-      name: cells[1].textContent,
-      price: parseFloat(cells[2].textContent.replace("$", "")),
-      description: cells[3].textContent
-    };
-    products.push(product);
-  }
-}
-
-// Function to display products in the table
-function displayProducts() {
-  const productList = document.getElementById("productList");
-  productList.innerHTML = "";
-
-  products.forEach((product, index) => {
-    const row = document.createElement("tr");
-    row.innerHTML = `
-      <td><img class="adminproduct-image" src="${product.image}" alt="${product.name}" class="product-image"></td>
-      <td class="adminproduct-name"><p>${product.name}</p></td>
-      <td class="adminproduct-price">$${product.price.toFixed(2)}</td>
-      <td class="adminproduct-detail"><p>${product.description}</p></td>
-      <td><button class="edit-product updatebtn" onclick="editProduct(${index})">Edit</button></td>
-      <td><button class="delete-product updatebtn" onclick="deleteProduct(${index})">Delete</button></td>
-    `;
-    productList.appendChild(row);
-  });
-}
 
 // Function to open the modal
 function openModal(mode, modalContent = null) {

@@ -46,7 +46,7 @@ include("header.php");
                         echo "<td>{$row['name']}</td>";
                         echo "<td>{$row['price']}</td>";
                         echo "<td>{$row['description']}</td>";
-                        echo "<td><button class='edit-product updatebtn' onclick='editProduct({$row['stk_id']})'>Edit</button></td>";
+                        echo "<td><a class='edit-product updatebtn' href='edititem.php?id={$row['stk_id']}'>Edit</a></td>";
                         echo "<td><a class='delete-product updatebtn' onclick=\"return confirm('Are you sure to delete?')\" href='deleteItem.php?id={$row['stk_id']}'>Delete</a></td>";                            
                         echo"</tr>";
                     }

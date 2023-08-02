@@ -14,12 +14,13 @@ $row = $result->fetch_assoc();
 
 if ($row) {
     $username = $row['name'];
+    $id=$row['u_id'];
     session_start();
     $_SESSION['name']=$username;
+    $_SESSION['u_id'] = $id;
         header("Location: product.php");
     exit();
 } else {
-    $_SESSION['errorMsg'] = "Either username or password is wrong";
     header("Location: index.php?error=");
     exit();
 }

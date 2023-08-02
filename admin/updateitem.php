@@ -16,4 +16,5 @@ include "../dbconnect.php";
 
 $result=mysqli_query($con,$q);
 echo "data updated successfully";
+header("location:index.php");
 ?>

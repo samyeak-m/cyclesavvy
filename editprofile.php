@@ -25,8 +25,8 @@ $row=mysqli_fetch_array($result,MYSQLI_ASSOC);
 <div class="edit-admin">
   <div class="container">
     <h1>Edit Profile</h1>
-    <form id="editProfileForm" method="post" action="updateitem.php" enctype="multipart/form-data">
-    <input type="text" value="<?php  echo $row['u_id'];?>" name="id">
+    <form id="editProfileForm" method="post" action="updateprofile.php" enctype="multipart/form-data">
+    <input type="hidden" value="<?php  echo $row['u_id'];?>" name="id">
       <div class="form-group">
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" value="<?php  echo $row['email'] ?>" required>
@@ -37,17 +37,17 @@ $row=mysqli_fetch_array($result,MYSQLI_ASSOC);
       </div>
       <div class="form-group">
   <label for="oldPassword">Old Password:</label>
-  <input type="password" id="oldPassword" name="oldPassword" required>
+  <input type="password" id="oldPassword" name="oldPassword" >
   <span class="password-toggle" id="oldPasswordToggle">Show Password</span>
 </div>
       <div class="form-group">
         <label for="newPassword">New Password:</label>
-        <input type="password" id="newPassword" name="newPassword" required>
+        <input type="password" id="newPassword" name="newPassword" >
         <span class="password-toggle" id="passwordToggle" onclick="toggle(this)">Show Password</span>
       </div>
       <div class="form-group">
   <label for="confirmPassword">Confirm Password:</label>
-  <input type="password" id="confirmPassword" name="confirmPassword" required>
+  <input type="password" id="confirmPassword" name="confirmPassword" >
   <span class="password-toggle" id="confirmPasswordToggle">Show Password</span>
 </div>
 

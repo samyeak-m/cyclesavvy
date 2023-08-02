@@ -1,7 +1,7 @@
 <?php 
 session_start();
 $username = "no-user";
-
+$id="28";
 
 if (!isset($_SESSION['name'])) {
     $displayAuser = "none";
@@ -12,10 +12,22 @@ if (!isset($_SESSION['name'])) {
     $displayUprofile = "none";
 }
 
+
 if (isset($_GET['error'])) {
     echo '<script>alert("Either username or password is wrong");</script>';
     echo '<script>window.history.replaceState(null, null, window.location.href.split("?")[0]);</script>';
 
+}
+else{
+    if (isset($_GET['u_id'])) {
+        $id = $_GET['u_id'];
+        // echo '<script>alert("id'.$id. '");</script>';
+    }
+    else{
+        // echo '<script>alert("no id '.$username.'");</script>';
+
+    }
+    
 }
 
  ?>
@@ -305,7 +317,7 @@ if (isset($_GET['error'])) {
                                     <div class="activities">
                                         <a href = "#">Whislist</a>
                                         <a href = "#">My Booking</a>
-                                        <a href = "editprofile.php?id=$id">Edit Profile</a>
+                                        <a href="editprofile.php?id=<?php echo $id; ?>">Edit Profile</a>
                                         <a href = "logout.php">Log out </a>
                                     </div>
                                 </div>

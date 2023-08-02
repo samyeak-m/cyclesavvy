@@ -66,7 +66,7 @@ while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
                           <div class="booking-date">
                               <div class="datetime-picker">
                                   <div class="date-picker">
-                                      <input class="date-input" placeholder="Choose a Booking date" readonly>
+                                      <input class="date-input" placeholder="Choose a Booking date" readonly required>
                                       <div class="calendar">
                                           <div class="calendar-header">
                                               <button class="prev-btn date-btn" onclick="prevMonth(this)">&lt;</button>
@@ -81,7 +81,7 @@ while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
                               </div>
                           </div>
                           <h5 class="product-price">' . $row['price'] . '</h5>
-                          <button type="submit" class="product-book-now-button" onclick=\"return confirm("Are you sure to delete?")\"><h3 class="product-book">Book Now</h3></button>
+                          <button type="submit" class="product-book-now-button" onclick="return alert("Booking Complete.")"><h3 class="product-book">Book Now</h3></button>
                       </div>
                   </div>
               </div>
