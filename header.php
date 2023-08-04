@@ -19,13 +19,8 @@ if (isset($_GET['error'])) {
 
 }
 else{
-    if (isset($_GET['u_id'])) {
-        $id = $_GET['u_id'];
-        // echo '<script>alert("id'.$id. '");</script>';
-    }
-    else{
-        // echo '<script>alert("no id '.$username.'");</script>';
-
+    if (isset($_SESSION['u_id'])) {
+        $id = $_SESSION['u_id'];
     }
     
 }
@@ -259,6 +254,12 @@ else{
                                     <input type="input" name="email" class="form_field" placeholder="Email" id="email" oninput="clearError('email')" class="input-clear">
                                     <label for="email" class="form_label">Email</label>
                                     <div id="emailError" class="error"></div>
+                                    </div>
+
+                                    <div class="form_group field">
+                                    <input type="tel" name="phone" class="form_field" placeholder="Phone" id="phone" oninput="clearError('phone')" class="input-clear">
+                                    <label for="phone" class="form_label">Phone</label>
+                                    <div id="phoneError" class="error"></div>
                                     </div>
 
                                     <div class="form_group field">

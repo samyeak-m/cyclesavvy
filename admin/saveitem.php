@@ -14,7 +14,6 @@ $result=mysqli_query($con,$q);
 
 
 sleep(1);
-echo'success';
 
 }
 catch(Exception $e){

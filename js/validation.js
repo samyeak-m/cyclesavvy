@@ -9,6 +9,12 @@ function validateForm() {
     var emailError = document.getElementById("emailError");
     var passwordError = document.getElementById("passwordError");
     var errorMessage = '';
+    var phone = document.getElementById("phone").value;
+        var phoneInput = document.getElementById("phone");
+        var phoneError = document.getElementById("phoneError");
+
+        phoneError.innerHTML = '';
+        phoneInput.classList.remove("input-error");
     
     nameError.innerHTML = '';
     emailError.innerHTML = '';
@@ -33,6 +39,13 @@ function validateForm() {
         emailInput.classList.add("input-error");
         return false;
     }
+
+        if (!/^(98)\d{8}$/.test(phone)) {
+            errorMessage += "Please enter a valid 10-digit phone number.<br>";
+            phoneError.innerHTML = errorMessage;
+            phoneInput.classList.add("input-error");
+            return false;
+        }
 
     // Validate password
     if (password.length < 8) {

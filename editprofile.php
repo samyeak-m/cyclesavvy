@@ -1,6 +1,6 @@
 <?php
 $currentPage = 'edit';
-// include("header.php");
+include("header.php");
 $id=$_GET['id'];
 include "dbconnect.php";
 $q="select * from tbl_user where u_id=$id";
@@ -25,7 +25,7 @@ $row=mysqli_fetch_array($result,MYSQLI_ASSOC);
 <div class="edit-admin">
   <div class="container">
     <h1>Edit Profile</h1>
-    <form id="editProfileForm" method="post" action="updateprofile.php" enctype="multipart/form-data">
+    <form id="myform" method="post" action="updateprofile.php">
     <input type="hidden" value="<?php  echo $row['u_id'];?>" name="id">
       <div class="form-group">
         <label for="email">Email:</label>
@@ -36,8 +36,8 @@ $row=mysqli_fetch_array($result,MYSQLI_ASSOC);
         <input type="tel" id="phone" name="phone" value="<?php  echo $row['phone'] ?>" required>
       </div>
       <div class="form-group">
-  <label for="oldPassword">Old Password:</label>
-  <input type="password" id="oldPassword" name="oldPassword" >
+  <label for="Password">Password:</label>
+  <input type="password" id="oldPassword" name="oldPassword" required>
   <span class="password-toggle" id="oldPasswordToggle">Show Password</span>
 </div>
       <div class="form-group">
@@ -50,6 +50,17 @@ $row=mysqli_fetch_array($result,MYSQLI_ASSOC);
   <input type="password" id="confirmPassword" name="confirmPassword" >
   <span class="password-toggle" id="confirmPasswordToggle">Show Password</span>
 </div>
+
+<?php
+        if (isset($_GET['erroredit'])) {
+            $error = $_GET['erroredit'];
+            echo '<div class="error">' . $error . '</div>';
+        }
+        if (isset($_GET['success'])) {
+            $successMessage = $_GET['success'];
+            echo '<div class="success">' . $successMessage . '</div>';
+        }
+        ?>
 
       <button type="submit">Save Changes</button>
     </form>
@@ -88,19 +99,18 @@ $row=mysqli_fetch_array($result,MYSQLI_ASSOC);
 
   const editProfileForm = document.getElementById('editProfileForm');
 
-  editProfileForm.addEventListener('submit', function (event) {
-    event.preventDefault();
-
-    // You can add the logic here to handle form submission and password change
-    // For now, let's just log the form data
-    const formData = new FormData(editProfileForm);
-    const data = {};
-    formData.forEach((value, key) => {
-      data[key] = value;
-    });
-    console.log(data);
-  });
 });
+
+function removeURLParameters() {
+    setTimeout(function () {
+      // Remove URL parameters without refreshing the page
+      var newURL = location.href.split("?")[0];
+      window.history.replaceState({}, document.title, newURL);
+    }, 1); // 2000 milliseconds = 2 seconds
+  }
+
+  // Call the function to remove URL parameters after 2 seconds
+  removeURLParameters();
 
 
   </script>
