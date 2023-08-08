@@ -1,6 +1,12 @@
 <?php
 $currentPage = 'edit';
 include("header.php");
+$id=$_GET['id'];
+include "dbconnect.php";
+$q="select * from tbl_admin where a_id=$id";
+$result=mysqli_query($con,$q);
+$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
+
 ?>
 
 <!DOCTYPE html>
@@ -10,7 +16,7 @@ include("header.php");
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Edit Profile</title>
-  <link rel="stylesheet" href="css/editadmin.css">
+  <link rel="stylesheet" href="css/editprofile.css">
 </head>
 
 <body>
@@ -18,30 +24,42 @@ include("header.php");
 <div class="edit-admin">
   <div class="container">
     <h1>Edit Profile</h1>
-    <form id="editProfileForm">
+    <form id="myform" method="post" action="updateprofile.php">
+    <input type="hidden" value="<?php  echo $row['a_id'];?>" name="id">
       <div class="form-group">
         <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
+        <input type="email" id="email" name="email" value="<?php  echo $row['email'] ?>" required>
       </div>
       <div class="form-group">
         <label for="phone">Phone:</label>
-        <input type="tel" id="phone" name="phone" required>
+        <input type="tel" id="phone" name="phone" value="<?php  echo $row['phone'] ?>" required>
       </div>
       <div class="form-group">
-  <label for="oldPassword">Old Password:</label>
+  <label for="Password">Password:</label>
   <input type="password" id="oldPassword" name="oldPassword" required>
   <span class="password-toggle" id="oldPasswordToggle">Show Password</span>
 </div>
       <div class="form-group">
         <label for="newPassword">New Password:</label>
-        <input type="password" id="newPassword" name="newPassword" required>
+        <input type="password" id="newPassword" name="newPassword" >
         <span class="password-toggle" id="passwordToggle" onclick="toggle(this)">Show Password</span>
       </div>
       <div class="form-group">
   <label for="confirmPassword">Confirm Password:</label>
-  <input type="password" id="confirmPassword" name="confirmPassword" required>
+  <input type="password" id="confirmPassword" name="confirmPassword" >
   <span class="password-toggle" id="confirmPasswordToggle">Show Password</span>
 </div>
+
+<?php
+        if (isset($_GET['erroredit'])) {
+            $error = $_GET['erroredit'];
+            echo '<div class="error">' . $error . '</div>';
+        }
+        if (isset($_GET['success'])) {
+            $successMessage = $_GET['success'];
+            echo '<div class="success">' . $successMessage . '</div>';
+        }
+        ?>
 
       <button type="submit">Save Changes</button>
     </form>
@@ -80,19 +98,18 @@ include("header.php");
 
   const editProfileForm = document.getElementById('editProfileForm');
 
-  editProfileForm.addEventListener('submit', function (event) {
-    event.preventDefault();
-
-    // You can add the logic here to handle form submission and password change
-    // For now, let's just log the form data
-    const formData = new FormData(editProfileForm);
-    const data = {};
-    formData.forEach((value, key) => {
-      data[key] = value;
-    });
-    console.log(data);
-  });
 });
+
+function removeURLParameters() {
+    setTimeout(function () {
+      // Remove URL parameters without refreshing the page
+      var newURL = location.href.split("?")[0];
+      window.history.replaceState({}, document.title, newURL);
+    }, 1); // 2000 milliseconds = 2 seconds
+  }
+
+  // Call the function to remove URL parameters after 2 seconds
+  removeURLParameters();
 
 
   </script>

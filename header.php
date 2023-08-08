@@ -1,7 +1,7 @@
 <?php 
 session_start();
 $username = "no-user";
-$id="28";
+$id="no-id";
 
 if (!isset($_SESSION['name'])) {
     $displayAuser = "none";
@@ -276,7 +276,7 @@ else{
                                     <h1>Sign in</h1>
 
                                     <div class="form_group field">
-                                    <input type="input" name="email" class="form_field" placeholder="Email" required/>
+                                    <input type="email" name="email" class="form_field" placeholder="Email" required/>
                                     <label for="email" class="form_label">Email</label>
                                     </div>
 

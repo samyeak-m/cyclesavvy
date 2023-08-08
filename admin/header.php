@@ -1,3 +1,22 @@
+<?php 
+session_start();
+$adminname = "no-user";
+$id="no-id";
+
+if (!isset($_SESSION['name'])) {
+    header('Location:login.php');
+    
+} else {
+    $adminname = $_SESSION['name'];
+    
+}
+
+    if (isset($_SESSION['a_id'])) {
+        $id = $_SESSION['a_id'];
+    }
+
+ ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,7 +48,7 @@
     <a class="anav profile-btn" href="#">Profile</a>
     <div class="profile-dropdown-content">
       <a class="anav" href="editadmin.php">Edit Profile</a>
-      <a class="anav" href="login.php">Logout</a>
+      <a class="anav" href="logout.php">Logout</a>
     </div>
   </div>
 
@@ -53,7 +72,7 @@
             <a class="anav <?php if ($currentPage === 'chat') echo 'active'; ?>" href="admin-chat.php"><li>Message</li></a>
             <a class="anav <?php if ($currentPage === 'contact') echo 'active'; ?>" href="contact.php"><li>Contact us</li></a>
             <a class="anav <?php if ($currentPage === 'edit') echo 'active'; ?>" href="editadmin.php"><li>Edit Profile</li></a>
-            <a class="anav" href="login.php"><li>Log Out</li></a>
+            <a class="anav" href="logout.php"><li>Log Out</li></a>
             </div>        
     </div>
 </navbar>
@@ -75,7 +94,7 @@
 
     }
 }
-    
+
 </script>
 
 </body>
