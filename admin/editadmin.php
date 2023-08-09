@@ -1,6 +1,6 @@
 <?php
 $currentPage = 'edit';
-// include("header.php");
+include("header.php");
 $id=$_GET['id'];
 include "../dbconnect.php";
 $q="select * from tbl_admin where a_id=$id";
