@@ -1,8 +1,8 @@
 <?php
 $currentPage = 'edit';
-include("header.php");
+// include("header.php");
 $id=$_GET['id'];
-include "dbconnect.php";
+include "../dbconnect.php";
 $q="select * from tbl_admin where a_id=$id";
 $result=mysqli_query($con,$q);
 $row=mysqli_fetch_array($result,MYSQLI_ASSOC);
@@ -16,7 +16,7 @@ $row=mysqli_fetch_array($result,MYSQLI_ASSOC);
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Edit Profile</title>
-  <link rel="stylesheet" href="css/editprofile.css">
+  <link rel="stylesheet" href="css/editadmin.css">
 </head>
 
 <body>
@@ -32,7 +32,7 @@ $row=mysqli_fetch_array($result,MYSQLI_ASSOC);
       </div>
       <div class="form-group">
         <label for="phone">Phone:</label>
-        <input type="tel" id="phone" name="phone" value="<?php  echo $row['phone'] ?>" required>
+        <input type="text" id="phone" name="phone" value="<?php  echo $row['phone'] ?>" required>
       </div>
       <div class="form-group">
   <label for="Password">Password:</label>

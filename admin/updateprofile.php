@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $successMessage = '';
 
     // Validate old password
-    include "dbconnect.php"; // Ensure to include the database connection file
+    include "../dbconnect.php"; // Ensure to include the database connection file
 
     $q = "SELECT password FROM tbl_admin WHERE a_id=$id";
     $result = mysqli_query($con, $q);
@@ -23,20 +23,21 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $error = "Old password is incorrect. Please try again.";
     } elseif ($newPassword !== $confirmPassword) {
         $error = "New password and confirm password do not match. Please try again.";
-    }
-    elseif (strlen($newPassword) < 8) {
-        $error = "New password must be at least 8 characters long.";
-    } elseif (!preg_match("/[A-Z]/", $newPassword)) {
-        $error = "New password must contain at least one uppercase letter.";
-    } elseif (!preg_match("/[a-z]/", $newPassword)) {
-        $error = "New password must contain at least one lowercase letter.";
-    } elseif (!preg_match("/\d/", $newPassword)) {
-        $error = "New password must contain at least one digit.";
-        
-    } else if (!preg_match("/[^a-zA-Z\d]/",$newPassword)){
-        $error = "NewPassword must contain at least one special character.<br>";
+    }elseif (!empty($newPassword)){
+        if (strlen($newPassword) < 8) {
+            $error = "New password must be at least 8 characters long.";
+        } elseif (!preg_match("/[A-Z]/", $newPassword)) {
+            $error = "New password must contain at least one uppercase letter.";
+        } elseif (!preg_match("/[a-z]/", $newPassword)) {
+            $error = "New password must contain at least one lowercase letter.";
+        } elseif (!preg_match("/\d/", $newPassword)) {
+            $error = "New password must contain at least one digit.";
+            
+        } else if (!preg_match("/[^a-zA-Z\d]/",$newPassword)){
+            $error = "NewPassword must contain at least one special character.<br>";
 
-    }
+        }
+}
 
      else {
         // All validations passed, proceed with updating the profile
@@ -58,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
     // Send the response back to editprofile.php using a URL parameter
-    header("location: editprofile.php?id=$id&erroredit=" . urlencode($error) . "&success=" . urlencode($successMessage));
+    header("location: editadmin.php?id=$id&erroredit=" . urlencode($error) . "&success=" . urlencode($successMessage));
     exit;
 }
 ?>

@@ -13,7 +13,7 @@ $result = $stmt->get_result();
 $row = $result->fetch_assoc();
 
 if ($row) {
-    if (password_verify($password, $row['password'])) {
+    if ($password===$row['password']) {
       $adminname = $row['name'];
       $id = $row['a_id'];
       session_start();

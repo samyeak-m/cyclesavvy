@@ -47,7 +47,7 @@ if (!isset($_SESSION['name'])) {
         <div class="profile-dropdown">
     <a class="anav profile-btn" href="#">Profile</a>
     <div class="profile-dropdown-content">
-      <a class="anav" href="editadmin.php">Edit Profile</a>
+      <a class="anav" href="editadmin.php?id=<?php echo $id; ?>">Edit Profile</a>
       <a class="anav" href="logout.php">Logout</a>
     </div>
   </div>
