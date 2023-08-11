@@ -13,15 +13,18 @@ include "header.php";
 <body>
   <div class="main">
     <section class="product">
+      <div class="contan-product">
     <?php
 
 include "dbconnect.php";
 $q="select * from tbl_inventory";
 $result=mysqli_query($con,$q);
-while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){      
+$i=0;
+while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){    
+  $i++;  
   echo '
   <div class="product-v">
-      <a class="product-pop-detail" onclick="openModal(this)">
+      <a class="product-pop-detail" onclick="openModal(this, ' . $row['stk_id'] . ')">
           <figure class="product-button">
               <img src="photo/' . $row['photo'] . '" alt="' . $row['name'] . ' Photo">
               <figcaption><h4>' . $row['name'] . '</h4> <p>' . $row['price'] . '</p></figcaption>
@@ -63,10 +66,11 @@ while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
                           </div>
                       </div>
                       <div class="product-booking">
+                      
                           <div class="booking-date">
                               <div class="datetime-picker">
                                   <div class="date-picker">
-                                      <input class="date-input" placeholder="Choose a Booking date" readonly required>
+                                  <input  class="date-input" id="date-input-' . $row['stk_id'] . '" name="booking-date" placeholder="Choose a Booking date"  autocomplete="off" required>
                                       <div class="calendar">
                                           <div class="calendar-header">
                                               <button class="prev-btn date-btn" onclick="prevMonth(this)">&lt;</button>
@@ -74,14 +78,22 @@ while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
                                               <button class="next-btn date-btn" onclick="nextMonth(this)">&gt;</button>
                                           </div>
                                           <div class="calendar-body">
-                                              <!-- Days of the week labels will be added dynamically in JavaScript -->
                                           </div>
                                       </div>
                                   </div>
                               </div>
                           </div>
                           <h5 class="product-price">' . $row['price'] . '</h5>
-                          <button type="submit" class="product-book-now-button" onclick="return alert("Booking Complete.")"><h3 class="product-book">Book Now</h3></button>
+                          <button type="submit" class="product-book-now-button" onclick="handleBooking(' . $row['stk_id'] . ', ' . $i . ')">
+                          <h3 class="product-book">Book Now</h3>
+                          </button>
+
+                          <form id="booking-form '.$i.'" action="booking.php" method="GET" style="display: none;">
+    <input type="hidden" id="hidden-stk-id-'.$i.'" name="id" value="">
+    <input type="hidden" id="hidden-user-id-'.$i.'" name="user_id" value="">
+    <input type="hidden" id="hidden-booking-date-'.$i.'" name="booking_date" value="">
+</form>
+                          
                       </div>
                   </div>
               </div>
@@ -89,10 +101,12 @@ while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
       </div>
   </div>
   </div>
-  ';
+  '
+  ;
 }
       
       ?>
+      </div>
       </section>
   </div>
 
@@ -195,7 +209,7 @@ while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
       createCalendar(calendars[index], currentDateArr[index]);
     });
 
-    function openModal(element) {
+    function openModal(element, stkId) {
       var width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
       if (width > 780) {
         var modal = element.nextElementSibling;
@@ -203,7 +217,7 @@ while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
           modal.style.display = "flex";
         }
       } else {
-        window.location.href = "productmobile.php";
+        window.location.href = `productmobile.php?id=${stkId}`;
       }
     }
 
@@ -224,12 +238,34 @@ while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
       });
     });
 
-    // Add this event listener to the "Book Now" buttons
-    bookNowButtons.forEach((button) => {
-      button.addEventListener('click', () => {
-        window.location.href = 'product.php';
-      });
-    });
+    function handleBooking(stkId, loopIndex) {
+    var bookingDateInput = document.getElementById('date-input-' + stkId);
+    var userId = <?php echo isset($_SESSION['u_id']) ? $_SESSION['u_id'] : 'null'; ?>;
+    
+    if (bookingDateInput) {
+        var bookingDate = bookingDateInput.value;
+        
+        if (bookingDate === '') {
+            alert("Please choose a booking date.");
+        } else {
+            var confirmation = confirm("Are you sure you want to confirm the booking date?");
+            
+            if (confirmation) {
+                // Populate the form fields
+                document.getElementById('hidden-stk-id-' + loopIndex).value = stkId;
+                document.getElementById('hidden-user-id-' + loopIndex).value = userId;
+                document.getElementById('hidden-booking-date-' + loopIndex).value = bookingDate;
+                
+                // Submit the form
+                document.getElementById('booking-form ' + loopIndex).submit();
+            }
+        }
+    }
+}
+
+
+
+
   </script>
 
 </body>

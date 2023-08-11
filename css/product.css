@@ -8,10 +8,21 @@
 .product {
   display: flex;
   flex-flow: row wrap;
-  justify-content: start;
+  justify-content: center;
   width: 70vw;
   gap: 2rem;
   row-gap: 4rem;
+}
+
+.contan-product{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: start;
+  width:97.66%;
+  gap: 2rem;
+  row-gap: 4rem;
+  
+
 }
 
 figure {

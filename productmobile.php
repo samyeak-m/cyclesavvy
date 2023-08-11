@@ -1,4 +1,7 @@
-<?php include"header.php"?>
+<?php
+$currentPage = 'home';
+include"header.php";
+?>
 
 <html>
 <head>
@@ -8,26 +11,32 @@
 </head>
 
 <body>
-     
+<?php
+$id = $_GET['id'];
+include "dbconnect.php";
+$q = "SELECT * FROM tbl_inventory WHERE stk_id = $id";
+$result=mysqli_query($con,$q);
+$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
+
+  echo '
+
 <div class="product-mobile">
 <div class="product-view">
     <div class="product-photo">
-        <img src="https://cdn.shopify.com/s/files/1/0541/0154/1047/products/0711964_b_900x.jpg?v=1614971567" alt="one" />
+    <img src="photo/' . $row['photo'] . '" alt="' . $row['name'] . ' Photo">
     </div>
 
     <div class="product-detail">
-            <h5 class="product-price">Rs 1,000</h5>
+    <h5 class="product-price">' . $row['price'] . '</h5>
     
-        <h2 class="product-head">Cycle Name</h2>
-        <p class="product-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores veniam minima harum blanditiis voluptas optio ipsum quibusdam molestiae ea voluptate tempore, amet dolorum aliquam incidunt natus voluptatem, molestias
-            voluptates. Dolores illo unde quae repudiandae dolorum, quam consequatur impedit nobis obcaecati.
-        </p>
+    <h2 class="product-head">' . $row['name'] . '</h2>
+    <p class="product-desc">' . $row['description'] . '</p>
 
         <div class="product-booking">
 			<div class="booking-date">		
 				<div class="datetime-picker">
 					<div class="date-picker">
-						<input id="date-input" class="date-input" placeholder="Choose a hire date" readonly>
+          <input  class="date-input" id="date-input" name="booking-date" placeholder="Choose a Booking date"  autocomplete="off" required>
 						<div class="calendar" id="calendar">
 							<div class="calendar-header">
 							<button class="prev-btn date-btn" onclick="prevMonth()">&lt;</button>
@@ -41,7 +50,9 @@
 					</div>
 				</div>
 			</div>
-      <button type="submit" class="product-book-now-button"><h3 class="product-book">Book Now</h3></button>
+      <button type="submit" class="product-book-now-button" onclick="handleBooking()">
+      <h3 class="product-book">Book Now</h3>
+      </button>
           </div>
     
 
@@ -77,6 +88,10 @@
         </div>
 </div>
 </div>
+';
+
+      
+      ?>
 
 <script>
 const dateInput = document.getElementById('date-input');
@@ -93,10 +108,10 @@ function toggleCalendar() {
 function handleDateSelection(selectedDate) {
   const formattedSelectedDate = new Date(selectedDate);
   if (!isDateDisabled(formattedSelectedDate)) {
-    formattedSelectedDate.setUTCHours(0, 0, 0, 0); // Set hours, minutes, seconds, and milliseconds to zero
-    dateInput.value = formattedSelectedDate.toISOString().slice(0, 10); // Convert to ISO string to set the input value
-    currentDate = formattedSelectedDate; // Update currentDate to the selected date
-    createCalendar(); // Rebuild the calendar with the selected date
+    formattedSelectedDate.setUTCHours(0, 0, 0, 0); 
+    dateInput.value = formattedSelectedDate.toISOString().slice(0, 10); 
+    currentDate = formattedSelectedDate; 
+    createCalendar();
   }
   toggleCalendar();
 }
@@ -175,13 +190,21 @@ document.addEventListener('keydown', (event) => {
   }
 });
 
-const bookNowButtons = document.querySelectorAll('.product-book-now-button');
+function handleBooking() {
+    var bookingDate = document.getElementById('date-input').value;
+    console.log(bookingDate);
+    
+    if (bookingDate=='') {
+        alert("Please choose a booking date.");
+        console.log('uncheck');
+    } else {
+      alert("booking date confirm.");
+      console.log('check');
 
-bookNowButtons.forEach((button) => {
-      button.addEventListener('click', () => {
-        window.location.href = 'product.php';
-      });
-    });
+        // window.location.href = 'confirmation.php';
+    }
+}
+
 
 </script>
 
