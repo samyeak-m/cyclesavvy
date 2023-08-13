@@ -207,6 +207,7 @@ figure:last-child {
   border-radius: 12px;
   color: white;
   padding: 5px 10px;
+  cursor: pointer;
 }
 
 .product-booking button[type="submit"]:hover,

@@ -316,8 +316,8 @@ else{
                             
                             <div class="auser" id="auser" style="display: <?php echo $displayAuser; ?>">
                                     <div class="activities">
-                                        <a href = "#">Whislist</a>
-                                        <a href = "#">My Booking</a>
+                                        <!-- <a href = "#">Whislist</a> -->
+                                        <a href = "notification.php">My Booking</a>
                                         <a href="editprofile.php?id=<?php echo $id; ?>">Edit Profile</a>
                                         <a href = "logout.php">Log out </a>
                                     </div>
