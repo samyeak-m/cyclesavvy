@@ -13,7 +13,7 @@ include "header.php";
 <body>
   <div class="main">
     <section class="product">
-      <div class="contan-product">
+      <!-- <div class="contan-product"> -->
     <?php
 
 include "dbconnect.php";
@@ -106,7 +106,7 @@ while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
 }
       
       ?>
-      </div>
+      <!-- </div> -->
       </section>
   </div>
 

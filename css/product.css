@@ -8,12 +8,12 @@
 .product {
   display: flex;
   flex-flow: row wrap;
-  justify-content: center;
+  justify-content: start;
   width: 70vw;
   gap: 2rem;
   row-gap: 4rem;
 }
-
+/* 
 .contan-product{
   display: flex;
   flex-flow: row wrap;
@@ -23,7 +23,7 @@
   row-gap: 4rem;
   
 
-}
+} */
 
 figure {
   height: 200px;
@@ -422,6 +422,7 @@ border-color: rgba(88,89,91,100%);
       gap: 1rem;
       row-gap: 2rem;
   }
+
 
   figure {
       padding: 11px;
