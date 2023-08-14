@@ -14,7 +14,7 @@
 
 			<div class="signup">
                 
-				<form method="post" action="#correct" onsubmit="return validateForm()">
+			<form method="post"id="myform" action="saveuser.php" enctype="multipart/form-data" onsubmit="return validateForm()">
 					<label for="chk" aria-hidden="true">Sign up</label>
 					
 					<input type="input" name="txt" placeholder="Name" id="name" oninput="clearError('name')" class="input-clear">
@@ -31,12 +31,13 @@
 			</div>
 
 			<div class="login" action="post">
-				<form>
+			<form action="logincheck.php" method="post">
+
 					<label for="chk" aria-hidden="true">Login</label>
 					
-					<input type="input" name="email" placeholder="Email" required="">
+					<input type="email" name="email" class="form_field" placeholder="Email" required/>
 					
-					<input type="password" name="pswd" placeholder="Password" required="">
+					<input type="password" name="password" id="log_password"class="form_field" placeholder="Password" required/>
 					
 					<button class="loginbtn">Login</button>
 				</form>
