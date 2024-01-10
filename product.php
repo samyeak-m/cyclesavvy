@@ -4,6 +4,7 @@ include "header.php";
 ?>
 
 <!DOCTYPE html>
+
 <head>
   <style>
     <?php include "css/product.css"; ?>
@@ -14,15 +15,15 @@ include "header.php";
   <div class="main">
     <section class="product">
       <!-- <div class="contan-product"> -->
-    <?php
+      <?php
 
-include "dbconnect.php";
-$q="select * from tbl_inventory";
-$result=mysqli_query($con,$q);
-$i=0;
-while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){    
-  $i++;  
-  echo '
+      include "dbconnect.php";
+      $q = "select * from tbl_inventory";
+      $result = mysqli_query($con, $q);
+      $i = 0;
+      while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+        $i++;
+        echo '
   <div class="product-v">
       <a class="product-pop-detail" onclick="openModal(this, ' . $row['stk_id'] . ')">
           <figure class="product-button">
@@ -87,11 +88,12 @@ while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
                           <button type="submit" class="product-book-now-button" onclick="handleBooking(' . $row['stk_id'] . ', ' . $i . ')">
                           <h3 class="product-book">Book Now</h3>
                           </button>
+                          </form>
 
-                          <form id="booking-form '.$i.'" action="booking.php" method="GET" style="display: none;">
-    <input type="hidden" id="hidden-stk-id-'.$i.'" name="id" value="">
-    <input type="hidden" id="hidden-user-id-'.$i.'" name="user_id" value="">
-    <input type="hidden" id="hidden-booking-date-'.$i.'" name="booking_date" value="">
+                          <form id="booking-form ' . $i . '" action="booking.php" method="GET" style="display: none;">
+    <input type="hidden" id="hidden-stk-id-' . $i . '" name="id" value="">
+    <input type="hidden" id="hidden-user-id-' . $i . '" name="user_id" value="">
+    <input type="hidden" id="hidden-booking-date-' . $i . '" name="booking_date" value="">
 </form>
                           
                       </div>
@@ -102,12 +104,12 @@ while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
   </div>
   </div>
   '
-  ;
-}
-      
+        ;
+      }
+
       ?>
       <!-- </div> -->
-      </section>
+    </section>
   </div>
 
   <script>
@@ -177,15 +179,13 @@ while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
     }
 
     function prevMonth(button) {
-      const index = Array.from(bookNowButtons).indexOf(button);
-      currentDateArr[index].setMonth(currentDateArr[index].getMonth() - 1);
-      createCalendar(calendars[index], currentDateArr[index]);
+      currentDate.setMonth(currentDate.getMonth() - 1);
+  createCalendar();
     }
 
     function nextMonth(button) {
-      const index = Array.from(bookNowButtons).indexOf(button);
-      currentDateArr[index].setMonth(currentDateArr[index].getMonth() + 1);
-      createCalendar(calendars[index], currentDateArr[index]);
+      currentDate.setMonth(currentDate.getMonth() + 1);
+  createCalendar();
     }
 
     dateInputs.forEach((input, index) => {
@@ -239,36 +239,39 @@ while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
     });
 
     function handleBooking(stkId, loopIndex) {
-    var bookingDateInput = document.getElementById('date-input-' + stkId);
-    var userId = <?php echo isset($_SESSION['u_id']) ? $_SESSION['u_id'] : 'null'; ?>;
-    
-    if (bookingDateInput) {
+      var bookingDateInput = document.getElementById('date-input-' + stkId);
+      var userId = <?php echo isset($_SESSION['u_id']) ? $_SESSION['u_id'] : 'null'; ?>;
+
+      if (bookingDateInput) {
         var bookingDate = bookingDateInput.value;
-        
+
         if (bookingDate === '') {
-            alert("Please choose a booking date.");
+          alert("Please choose a booking date.");
         } else {
-            var confirmation = confirm("Are you sure you want to confirm the booking date?");
-            
-            if (confirmation) {
-                // Populate the form fields
-                document.getElementById('hidden-stk-id-' + loopIndex).value = stkId;
-                document.getElementById('hidden-user-id-' + loopIndex).value = userId;
-                document.getElementById('hidden-booking-date-' + loopIndex).value = bookingDate;
-                
-                // Submit the form
-                document.getElementById('booking-form ' + loopIndex).submit();
-            }
+          var confirmation = confirm("Are you sure you want to confirm the booking date?");
+
+          if (confirmation) {
+            // Populate the form fields
+            document.getElementById('hidden-stk-id-' + loopIndex).value = stkId;
+            document.getElementById('hidden-user-id-' + loopIndex).value = userId;
+            document.getElementById('hidden-booking-date-' + loopIndex).value = bookingDate;
+
+            // Submit the form
+            document.getElementById('booking-form ' + loopIndex).submit();
+          }
         }
+      }
     }
-}
 
-
+    function redirectToKhalti() {
+        window.location.href = 'khalti.php';
+    }
 
 
   </script>
 
 </body>
+
 </html>
 
 <?php include "footer.php"; ?>

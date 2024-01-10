@@ -1,0 +1,32 @@
+*,body{
+    margin: 0;
+    padding: 0;
+    scroll-behavior:smooth;
+    
+}
+
+/* scorllbar */
+*::-webkit-scrollbar
+{
+  display: none;
+}
+
+a,
+button,
+input[type="submit"],
+input[type="button"],
+input[type="reset"],
+label,
+img,
+.msgBtn,
+.notBtn,
+.puBtn,
+.date-btn {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none; 
+  -moz-user-select: none; 
+  -ms-user-select: none; 
+  user-select: none;
+}
+

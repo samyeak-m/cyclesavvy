@@ -43,11 +43,39 @@ if (isset($_GET['user_id']) && isset($_GET['id']) && isset($_GET['booking_date']
 
             if ($insertResult) {
                 $insertedBookId = mysqli_insert_id($con);
-                echo "<script>
-                        alert('Booking done! Book ID: $insertedBookId, User Name: $userName, Cycle Name: $cycleName, Date: $bookingDate');
-                        window.location.href = 'product.php';
-                      </script>";
+
+                echo "
+                <!DOCTYPE html>
+                <html lang='en'>
+                <head>
+                    <meta charset='UTF-8'>
+                    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+                    <style>
+                </style>
+                    <title></title>
+                </head>
+                <body>
+                <div class='databook'>
+                <p>$insertedBookId</p>
+                <p>$userName</p>
+                <p>$cycleName</p>
+                <p>$bookingDate</p>
+                </div>
+                <div class='paymethod'>
+                <a href='esewa.php'>esew</a>
+                ";
+                include 'khalti.php';
+                // include 'qrcode.php';
+                // include 'cod.php';
+                "
+                </div>
+
+                </body>
+                </html>
+                ";
+
                 exit; // Make sure to include this exit statement
+
             } else {
                 echo "<script>
                         alert('Error inserting booking: " . mysqli_error($con) . "');

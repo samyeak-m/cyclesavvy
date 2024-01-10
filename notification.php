@@ -59,6 +59,7 @@ if (!$fetchNotificationsResult) {
                         $cycleName = $notificationData['cyclename'];
                         $bookingDate = $notificationData['booking_date'];
                         $cyclePhoto = $notificationData['cyclephoto'];
+
                         ?>
                         <div class="sec">
                             <!-- <div class="profCont">

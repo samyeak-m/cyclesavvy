@@ -140,6 +140,24 @@
     background-color:rgb(223, 223, 223,40%);
 }
 
+.updatebtn{
+    color: white;
+    border-radius: 8px;
+    padding: 8px 10px;
+    cursor: pointer;
+
+}
+
+.delete-product{
+    background-color: red;
+    border: 2px solid red;
+}
+
+.delete-product:hover{
+    background-color: var(--textcolor);
+    border-color: var(--textcolor);
+}
+
 @media only screen and (width<=780px) {
  
     .nothead{
@@ -154,5 +172,11 @@
 
     .notpar > h4::after{
           margin: -1px 0 ;
+    }
+    
+    .updatebtn{
+        font-size: 10px;
+        font-weight: 600;
+        padding: 5px 7px;
     }
 }
