@@ -37,6 +37,11 @@ if (isset($_GET['user_id']) && isset($_GET['id']) && isset($_GET['booking_date']
             $cycleData = mysqli_fetch_assoc($getCycleResult);
             $cycleName = $cycleData['name'];
 
+            $getPriceQuery = "SELECT price FROM tbl_inventory WHERE stk_id = '$stkId'";
+            $getPriceResult = mysqli_query($con, $getPriceQuery);
+            $PriceData = mysqli_fetch_assoc($getPriceResult);
+            $price = $PriceData['price'];
+
             // Insert the booking along with user's name and cycle name
             $insertQuery = "INSERT INTO tbl_booking (`client_id`, `stock_id`, `username`, `cyclename`, `date`) VALUES ('$userId', '$stkId', '$userName', '$cycleName', '$bookingDate')";
             $insertResult = mysqli_query($con, $insertQuery);
@@ -60,6 +65,7 @@ if (isset($_GET['user_id']) && isset($_GET['id']) && isset($_GET['booking_date']
                 <p>$userName</p>
                 <p>$cycleName</p>
                 <p>$bookingDate</p>
+                <p>$price</p>
                 </div>
                 <div class='paymethod'>
                 <a href='esewa.php'>esew</a>
