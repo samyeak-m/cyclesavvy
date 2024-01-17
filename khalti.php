@@ -14,7 +14,7 @@
     $bookingDate = isset($bookingDate) ? $bookingDate : '';
     // $amountbook = isset($price) ? $price : '';
     ?>
-    ...
+
     <!-- Place this where you need payment button -->
     <button id="payment-button">Pay with Khalti</button>
     <!-- Place this where you need payment button -->
@@ -31,7 +31,7 @@
             "publicKey": "test_public_key_052955d2323d4f89b8f263be8096dd78",
             "productIdentity": BookId,
             "productName": cycleName,
-            "productUrl": url, //PRODUCTURL AFTER SUCCESSFUL PAYMENT
+            "productUrl": url, 
             "paymentPreference": [
                 "KHALTI",
                 "EBANKING",
@@ -41,12 +41,13 @@
             ],
             "eventHandler": {
                 onSuccess(payload) {
-                    // hit merchant api for initiating verfication
                     console.log(payload);
                     let token = payload.token;
                     let amount = payload.amount / 100;
                     let bookid = payload.product_identity;
                     let name = payload.product_name;
+
+                    console.log(token,amount,bookid,name)
 
                     sessionStorage.setItem('token', token);
                     sessionStorage.setItem('amount', amount);
@@ -67,12 +68,10 @@
         var checkout = new KhaltiCheckout(config);
         var btn = document.getElementById("payment-button");
         btn.onclick = function () {
-            // minimum transaction amount must be 10, i.e 1000 in paisa.
             checkout.show({ amount: amountbook });
         }
     </script>
-    <!-- Paste this code anywhere in you body tag -->
-    ...
+    
 </body>
 
 </html>
