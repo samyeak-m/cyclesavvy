@@ -31,7 +31,7 @@
             "publicKey": "test_public_key_052955d2323d4f89b8f263be8096dd78",
             "productIdentity": BookId,
             "productName": cycleName,
-            "productUrl": url, 
+            "productUrl": url,
             "paymentPreference": [
                 "KHALTI",
                 "EBANKING",
@@ -46,15 +46,45 @@
                     let amount = payload.amount / 100;
                     let bookid = payload.product_identity;
                     let name = payload.product_name;
+                    
 
-                    console.log(token,amount,bookid,name)
+                    console.log(token, amount, bookid, name)
+                    passdata();
+                    function passdata() {
+                        var form = document.createElement("form");
+                        form.method = "post";
+                        form.action = "payment.php";
 
-                    sessionStorage.setItem('token', token);
-                    sessionStorage.setItem('amount', amount);
-                    sessionStorage.setItem('bookid', bookid);
-                    sessionStorage.setItem('name', name);
+                        var tokenInput = document.createElement("input");
+                        tokenInput.type = "hidden";
+                        tokenInput.name = "token";
+                        tokenInput.value = token;
 
-                    window.location.href = 'payment.php';
+                        var amountInput = document.createElement("input");
+                        amountInput.type = "hidden";
+                        amountInput.name = "amount";
+                        amountInput.value = amount;
+
+                        var bookidInput = document.createElement("input");
+                        bookidInput.type = "hidden";
+                        bookidInput.name = "bookid";
+                        bookidInput.value = bookid;
+
+                        var nameInput = document.createElement("input");
+                        nameInput.type = "hidden";
+                        nameInput.name = "name";
+                        nameInput.value = name;
+
+                        form.appendChild(tokenInput);
+                        form.appendChild(amountInput);
+                        form.appendChild(bookidInput);
+                        form.appendChild(nameInput);
+
+                        document.body.appendChild(form);
+
+                        form.submit();
+                    }
+
                 },
                 onError(error) {
                     console.log(error);
@@ -71,7 +101,7 @@
             checkout.show({ amount: amountbook });
         }
     </script>
-    
+
 </body>
 
 </html>

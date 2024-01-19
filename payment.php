@@ -6,65 +6,6 @@ $amount = '';
 $bookid = '';
 $name = '';
 
-
-echo '
-<body>
-<script>
-    
-    function datapassed() {
-        
-        var token = sessionStorage.getItem("token");
-        var amount = sessionStorage.getItem("amount");
-        var bookid = sessionStorage.getItem("bookid");
-        var name = sessionStorage.getItem("name");
-
-        console.log(token, amount, bookid, name);
-
-        var form = document.createElement("form");
-        form.method = "post";
-        form.action = "";
-
-        var tokenInput = document.createElement("input");
-        tokenInput.type = "hidden";
-        tokenInput.name = "token";
-        tokenInput.value = token;
-
-        var amountInput = document.createElement("input");
-        amountInput.type = "hidden";
-        amountInput.name = "amount";
-        amountInput.value = amount;
-
-        var bookidInput = document.createElement("input");
-        bookidInput.type = "hidden";
-        bookidInput.name = "bookid";
-        bookidInput.value = bookid;
-
-        var nameInput = document.createElement("input");
-        nameInput.type = "hidden";
-        nameInput.name = "name";
-        nameInput.value = name;
-
-        form.appendChild(tokenInput);
-        form.appendChild(amountInput);
-        form.appendChild(bookidInput);
-        form.appendChild(nameInput);
-
-        document.body.appendChild(form);
-
-            form.submit();
-            dataget();
-    }
-        
-        datapassed();
-
-    function dataget() {
-        console.log("data pass");
-    }
-    
-</script>
-</body>';
-        
-
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $token = isset($_POST["token"]) ? $_POST["token"] : '';
     $amount = isset($_POST["amount"]) ? $_POST["amount"] : '';
@@ -80,23 +21,32 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             echo "Error: " . mysqli_error($con);
             $success = false;
         }
+
+        $checkStkId = "SELECT stock_id FROM tbl_booking WHERE book_id = '$bookid'";
+        $checkStkIdResult = mysqli_query($con, $checkStkId);
+        $stk_id = mysqli_fetch_assoc($checkStkIdResult);
+        $stkId = $stk_id['stock_id'];
+
+
+        $checkPhotoQuery = "SELECT photo FROM tbl_inventory WHERE stk_id = '$stkId'";
+        $checkPhotoResult = mysqli_query($con, $checkPhotoQuery);
+        $checkPhoto = mysqli_fetch_assoc($checkPhotoResult);
+        $stk_photo = $checkPhoto['photo'];
+
+        $checkuserId = "SELECT client_id FROM tbl_booking WHERE book_id = '$bookid'";
+        $checkuserIdResult = mysqli_query($con, $checkuserId);
+        $uid = mysqli_fetch_assoc($checkuserIdResult);
+        $userId = $uid['client_id'];
+
+        $getUserQuery = "SELECT name FROM tbl_user WHERE u_id = '$userId'";
+        $getUserResult = mysqli_query($con, $getUserQuery);
+        $userData = mysqli_fetch_assoc($getUserResult);
+        $userName = $userData['name'];
     }
+
+
 }
 ?>
-
-<script>
-    var success = <?php echo $success ? 'true' : 'false'; ?>;
-
-    if (success) {
-
-        alert("Updated data in the database!");
-
-    } else {
-        alert("Error updating data in the database!");
-
-    }
-</script>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -104,22 +54,35 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
 </head>
 
 <body>
 
-    <?php
-    echo "here is", $token, $amount, $bookid, $name;
-    ?>
-    <div id="formpay">
-        <form action="">
-            <input type="hidden" name="bookid" value="<?php echo $bookid; ?>">
-            <input type="text" name="token" value="<?php echo $token; ?>">
-            <input type="text" name="amount" value="<?php echo $amount; ?>">
-            <input type="text" name="name" value="<?php echo $name; ?>">
+    <div class="formpay" style="display:none;">
+        <form action="product.php">
+            <img src='photo/<?php echo $stk_photo ?>' alt='Stock Photo'>
+            <input type="text" name="username" value="<?php echo $userName; ?>" readonly>
+            <input type="text" name="token" value="<?php echo $token; ?>" readonly>
+            <input type="text" name="amount" value="<?php echo $amount; ?>" readonly>
+            <input type="text" name="name" value="<?php echo $name; ?>" readonly>
+            <button type="submit">Payment Complete</button>
         </form>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var success = <?php echo $success ? 'true' : 'false'; ?>;
+
+            if (success) {
+                var formpayElements = document.querySelectorAll(".formpay");
+                formpayElements.forEach(function (element) {
+                    element.style.display = "block";
+                });
+            } else {
+                alert("Error updating data in the database!");
+            }
+        });
+    </script>
 </body>
+
 
 </html>
