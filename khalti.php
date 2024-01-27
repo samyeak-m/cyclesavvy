@@ -48,7 +48,7 @@
                     let name = payload.product_name;
                     
 
-                    console.log(token, amount, bookid, name)
+                    console.log(token, amount, bookid, name);
                     passdata();
                     function passdata() {
                         var form = document.createElement("form");
