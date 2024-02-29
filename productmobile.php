@@ -1,9 +1,10 @@
 <?php
 $currentPage = 'home';
-include"header.php";
+include "header.php";
 ?>
 
 <html>
+
 <head>
   <style>
     <?php include "css/productmobile.css"; ?>
@@ -11,14 +12,15 @@ include"header.php";
 </head>
 
 <body>
-<?php
-$id = $_GET['id'];
-include "dbconnect.php";
-$q = "SELECT * FROM tbl_inventory WHERE stk_id = $id";
-$result=mysqli_query($con,$q);
-$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
-
-  echo '
+  <?php
+  $id = $_GET['id'];
+  include "dbconnect.php";
+  $q = "SELECT * FROM tbl_inventory WHERE stk_id = $id";
+  $result = mysqli_query($con, $q);
+  $i = 0;
+  while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+    $i++;
+    echo '
 
 <div class="product-mobile">
 <div class="product-view">
@@ -50,7 +52,7 @@ $row=mysqli_fetch_array($result,MYSQLI_ASSOC);
 					</div>
 				</div>
 			</div>
-      <button type="submit" class="product-book-now-button" onclick="handleBooking()">
+      <button type="submit" class="product-book-now-button" onclick="handleBooking(' . $row['stk_id'] . ', ' . $i . ')">
       <h3 class="product-book">Book Now</h3>
       </button>
           </div>
@@ -87,126 +89,142 @@ $row=mysqli_fetch_array($result,MYSQLI_ASSOC);
 
         </div>
 </div>
+<form id="booking-form ' . $i . '" action="booking.php" method="GET" style="display: none;">
+    <input type="hidden" id="hidden-stk-id-' . $i . '" name="id" value="">
+    <input type="hidden" id="hidden-user-id-' . $i . '" name="user_id" value="">
+    <input type="hidden" id="hidden-booking-date-' . $i . '" name="booking_date" value="">
+</form>
 </div>
 ';
-
-      
-      ?>
-
-<script>
-const dateInput = document.getElementById('date-input');
-const calendar = document.getElementById('calendar');
-const calendarBody = calendar.querySelector('.calendar-body');
-const currentMonthYear = document.getElementById('current-month-year');
-
-let currentDate = new Date();
-
-function toggleCalendar() {
-  calendar.style.display = calendar.style.display === 'block' ? 'none' : 'block';
-}
-
-function handleDateSelection(selectedDate) {
-  const formattedSelectedDate = new Date(selectedDate);
-  if (!isDateDisabled(formattedSelectedDate)) {
-    formattedSelectedDate.setUTCHours(0, 0, 0, 0); 
-    dateInput.value = formattedSelectedDate.toISOString().slice(0, 10); 
-    currentDate = formattedSelectedDate; 
-    createCalendar();
-  }
-  toggleCalendar();
-}
-
-function getDaysInMonth(year, month) {
-  return new Date(year, month + 1, 0).getDate();
-}
-
-function getFirstDayOfMonth(year, month) {
-  return new Date(year, month, 1).getDay();
-}
-
-function isDateDisabled(date) {
-  const today = new Date();
-  return date < today;
-}
-
-function createCalendar() {
-  const year = currentDate.getFullYear();
-  const month = currentDate.getMonth();
-  const daysInMonth = getDaysInMonth(year, month);
-  const firstDayOfMonth = getFirstDayOfMonth(year, month);
-  const monthName = new Intl.DateTimeFormat('en-US', { month: 'long' }).format(currentDate);
-
-  currentMonthYear.textContent = `${monthName} ${year}`;
-
-  let calendarContent = '';
-
-  const dayOfWeekNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-  for (const dayName of dayOfWeekNames) {
-    calendarContent += `<div class="calendar-day day-of-week">${dayName}</div>`;
   }
 
-  for (let i = 0; i < firstDayOfMonth; i++) {
-    calendarContent += '<div class="calendar-day disabled"></div>';
-  }
+  ?>
 
-  for (let i = 1; i <= daysInMonth; i++) {
-    const formattedDate = new Date(Date.UTC(year, month, i));
-    const isDisabled = isDateDisabled(formattedDate) ? 'disabled' : '';
-    const isToday = currentDate.toDateString() === formattedDate.toDateString() ? 'today' : '';
-    const isSelected = dateInput.value === formattedDate.toISOString().slice(0, 10) ? 'selected' : '';
+  <script>
+    const dateInput = document.getElementById('date-input');
+    const calendar = document.getElementById('calendar');
+    const calendarBody = calendar.querySelector('.calendar-body');
+    const currentMonthYear = document.getElementById('current-month-year');
 
-    const clickHandler = isDisabled ? '' : `onclick="handleDateSelection('${formattedDate.toISOString().slice(0, 10)}')"`;
-    calendarContent += `<div class="calendar-day ${isDisabled} ${isToday} ${isSelected}" ${clickHandler}>${i}</div>`;
-  }
+    let currentDate = new Date();
 
-  calendarBody.innerHTML = calendarContent;
-}
-
-function prevMonth() {
-  currentDate.setMonth(currentDate.getMonth() - 1);
-  createCalendar();
-}
-
-function nextMonth() {
-  currentDate.setMonth(currentDate.getMonth() + 1);
-  createCalendar();
-}
-
-dateInput.addEventListener('click', () => {
-  toggleCalendar();
-});
-
-createCalendar();
-
-document.addEventListener('click', (event) => {
-  if (!calendar.contains(event.target) && event.target !== dateInput) {
-    calendar.style.display = 'none';
-  }
-});
-
-document.addEventListener('keydown', (event) => {
-  if (event.key === 'Escape') {
-    calendar.style.display = 'none';
-  }
-});
-
-function handleBooking() {
-    var bookingDate = document.getElementById('date-input').value;
-    console.log(bookingDate);
-    
-    if (bookingDate=='') {
-        alert("Please choose a booking date.");
-        console.log('uncheck');
-    } else {
-      alert("booking date confirm.");
-      console.log('check');
-
-        // window.location.href = 'confirmation.php';
+    function toggleCalendar() {
+      calendar.style.display = calendar.style.display === 'block' ? 'none' : 'block';
     }
-}
+
+    function handleDateSelection(selectedDate) {
+      const formattedSelectedDate = new Date(selectedDate);
+      if (!isDateDisabled(formattedSelectedDate)) {
+        formattedSelectedDate.setUTCHours(0, 0, 0, 0);
+        dateInput.value = formattedSelectedDate.toISOString().slice(0, 10);
+        currentDate = formattedSelectedDate;
+        createCalendar();
+      }
+      toggleCalendar();
+    }
+
+    function getDaysInMonth(year, month) {
+      return new Date(year, month + 1, 0).getDate();
+    }
+
+    function getFirstDayOfMonth(year, month) {
+      return new Date(year, month, 1).getDay();
+    }
+
+    function isDateDisabled(date) {
+      const today = new Date();
+      return date < today;
+    }
+
+    function createCalendar() {
+      const year = currentDate.getFullYear();
+      const month = currentDate.getMonth();
+      const daysInMonth = getDaysInMonth(year, month);
+      const firstDayOfMonth = getFirstDayOfMonth(year, month);
+      const monthName = new Intl.DateTimeFormat('en-US', { month: 'long' }).format(currentDate);
+
+      currentMonthYear.textContent = `${monthName} ${year}`;
+
+      let calendarContent = '';
+
+      const dayOfWeekNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+      for (const dayName of dayOfWeekNames) {
+        calendarContent += `<div class="calendar-day day-of-week">${dayName}</div>`;
+      }
+
+      for (let i = 0; i < firstDayOfMonth; i++) {
+        calendarContent += '<div class="calendar-day disabled"></div>';
+      }
+
+      for (let i = 1; i <= daysInMonth; i++) {
+        const formattedDate = new Date(Date.UTC(year, month, i));
+        const isDisabled = isDateDisabled(formattedDate) ? 'disabled' : '';
+        const isToday = currentDate.toDateString() === formattedDate.toDateString() ? 'today' : '';
+        const isSelected = dateInput.value === formattedDate.toISOString().slice(0, 10) ? 'selected' : '';
+
+        const clickHandler = isDisabled ? '' : `onclick="handleDateSelection('${formattedDate.toISOString().slice(0, 10)}')"`;
+        calendarContent += `<div class="calendar-day ${isDisabled} ${isToday} ${isSelected}" ${clickHandler}>${i}</div>`;
+      }
+
+      calendarBody.innerHTML = calendarContent;
+    }
+
+    function prevMonth() {
+      currentDate.setMonth(currentDate.getMonth() - 1);
+      createCalendar();
+    }
+
+    function nextMonth() {
+      currentDate.setMonth(currentDate.getMonth() + 1);
+      createCalendar();
+    }
+
+    dateInput.addEventListener('click', () => {
+      toggleCalendar();
+    });
+
+    createCalendar();
+
+    document.addEventListener('click', (event) => {
+      if (!calendar.contains(event.target) && event.target !== dateInput) {
+        calendar.style.display = 'none';
+      }
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        calendar.style.display = 'none';
+      }
+    });
+
+    function handleBooking(stkId, loopIndex) {
+      var bookingDateInput = document.getElementById('date-input').value;
+
+      var userId = <?php echo isset($_SESSION['u_id']) ? $_SESSION['u_id'] : 'null'; ?>;
+
+      if (bookingDateInput) {
+        var bookingDate = bookingDateInput.value;
+
+        if (bookingDate === '') {
+          alert("Please choose a booking date.");
+        } else {
+          var confirmation = confirm("Are you sure you want to confirm the booking date?");
+
+          if (confirmation) {
+            // Populate the form fields
+            document.getElementById('hidden-stk-id-' + loopIndex).value = stkId;
+            document.getElementById('hidden-user-id-' + loopIndex).value = userId;
+            document.getElementById('hidden-booking-date-' + loopIndex).value = bookingDate;
+
+            // Submit the form
+            document.getElementById('booking-form ' + loopIndex).submit();
+          }
+        }
+      }
+    }
 
 
-</script>
+  </script>
 
 </body>
 

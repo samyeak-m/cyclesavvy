@@ -1,6 +1,6 @@
 <?php
 
-session_start();
+include 'header.php';
 
 include "dbconnect.php";
 
@@ -105,37 +105,43 @@ function proceedBooking($con, $userId, $stkId, $bookingDate){
     if ($insertResult) {
         $insertedBookId = mysqli_insert_id($con);
 
-        echo "
-        <!DOCTYPE html>
-        <html lang='en'>
-        <head>
-            <meta charset='UTF-8'>
-            <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-            <style>
-        </style>
-            <title></title>
-        </head>
-        <body>
-        <div class='databook'>
-        <p style='display:none;'>$insertedBookId</p>
-        <img src='photo/$stk_photo' alt='Stock Photo'>
-        <p>$userName</p>
-        <p>$cycleName</p>
-        <p>$bookingDate</p>
-        <p>$price</p>
-        </div>
-        <div class='paymethod'>
-        <a href='esewa.php'>esew</a>
-        ";
-        include 'khalti.php';
-        // include 'qrcode.php';
-        // include 'cod.php';
-        "
+echo '
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/booking.css">
+    <title>Product</title>
+</head>
+<body>
+    <div class="databook">
+        <div class="databook-con">
+            <p style="display:none;">' . $insertedBookId . '</p>
+            <div class="image-con">
+                <img class="image-prod" src="photo/' . $stk_photo . '" alt="Stock Photo">
+            </div>
+            <div class="detail-prod">
+                <p>' . $userName . '</p>
+                <p>' . $cycleName . '</p>
+                <p>' . $bookingDate . '</p>
+                <p>' . $price . '</p>
+            </div>
         </div>
 
-        </body>
-        </html>
-        ";
+        <div class="paymethod">
+            <button onclick="window.location.href=\'esewa.php\'">esewa</button>
+';
+
+include 'khalti.php';
+
+echo '
+        </div>
+    </div>
+</body>
+</html>
+';
+
 
         exit; // Make sure to include this exit statement
 

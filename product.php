@@ -119,6 +119,8 @@ include "header.php";
     const bookNowButtons = document.querySelectorAll('.product-book-now-button');
     const dayOfWeekNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
+    let currentDate = new Date();
+
     function toggleCalendar(calendar) {
       calendar.style.display = calendar.style.display === 'block' ? 'none' : 'block';
     }
@@ -180,12 +182,12 @@ include "header.php";
 
     function prevMonth(button) {
       currentDate.setMonth(currentDate.getMonth() - 1);
-  createCalendar();
+      createCalendar(button.parentNode.parentNode, currentDate);
     }
 
     function nextMonth(button) {
       currentDate.setMonth(currentDate.getMonth() + 1);
-  createCalendar();
+      createCalendar(button.parentNode.parentNode, currentDate);
     }
 
     dateInputs.forEach((input, index) => {
@@ -207,6 +209,7 @@ include "header.php";
 
       currentDateArr[index] = new Date();
       createCalendar(calendars[index], currentDateArr[index]);
+
     });
 
     function openModal(element, stkId) {
@@ -264,7 +267,7 @@ include "header.php";
     }
 
     function redirectToKhalti() {
-        window.location.href = 'khalti.php';
+      window.location.href = 'khalti.php';
     }
 
 
