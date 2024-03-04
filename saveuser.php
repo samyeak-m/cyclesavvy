@@ -7,11 +7,7 @@ try {
 	$password = $_POST['password'];
 	$phone = $_POST['phone'];
 
-	if ($name==="admin"){
-		echo '<script>alert("Username already taken");</script>';
-		echo '<script>window.location.href = "index.php";</script>';
-		exit();
-	} else {
+	
 		include "dbconnect.php";
 
 		$checkQuery = "SELECT * FROM `tbl_user` WHERE `email` = ?";
@@ -58,7 +54,7 @@ try {
 		}
 
 	}
-} catch (Exception $e) {
+catch (Exception $e) {
 	throw $e;
 }
 
