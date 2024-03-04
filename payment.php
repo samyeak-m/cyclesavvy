@@ -58,33 +58,37 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </head>
 
 <body>
-
     <div class="formpay" style="display:none;">
         <div class="formpay-con pdfdown">
             <div class="image-con">
                 <img class="image-prod" src='photo/<?php echo $stk_photo ?>' alt='Stock Photo'>
             </div>
             <div class="detail-prod">
+                <h1>User Name</h1>
                 <p class='pay-det'>
                     <?php echo $userName; ?>
                 </p>
-                <p class='pay-det'>
-                    <?php echo $token; ?>
-                </p>
-                <p class='pay-det'>
-                    <?php echo $amount; ?>
-                </p>
+                <h1>Cycle Name</h1>
                 <p class='pay-det'>
                     <?php echo $name; ?>
                 </p>
+                <h1>Price</h1>
+                <p class='pay-det'>
+                    <?php echo $amount; ?>
+                </p>
+                <h1>Khalti Token</h1>
+                <p class='pay-det'>
+                    <?php echo $token; ?>
+                </p>
             </div>
             <div class="paymethod">
-                <button onclick="window.location.href='product.php'">Payment Complete</button>
-                <button onclick="window.print()">Print</button>
-                <button id="downloadPdf">View as PDF</button>
+                <button onclick="window.location.href='product.php'">Done</button>
+                <button id="downloadPdf">PDF</button>
             </div>
         </div>
     </div>
+
+    
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
 
@@ -109,38 +113,58 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         document.getElementById('downloadPdf').addEventListener('click', function () {
             var pdfElements = document.querySelectorAll("button");
             var pdfWidth = document.querySelector('.formpay-con');
-
-            pdfWidth.style.width = "50vw";
+            var width = document.documentElement.clientWidth;
 
             pdfElements.forEach(function (element) {
                 element.style.display = "none";
             });
 
             var content = document.querySelector('.pdfdown');
-            var contentWidth = content.clientWidth;
-            var contentHeight = content.clientHeight;
 
-            html2canvas(content, { width: contentWidth, height: contentHeight }).then((canvas) => {
-                let base64image = canvas.toDataURL('image/png');
-                // let pdf = new jsPDF('p', 'px', [contentWidth, contentHeight]);
-                let pdf = new jsPDF('p', 'px', [1920, 1080]);
-                pdf.addImage(base64image, 'PNG', 96, 96, contentWidth, contentHeight);
+            if (width > 780) {
+                pdfWidth.style.width = "55vw";
+                let width = 1920;
+                let height = 1080;
 
-                var pdfBlob = pdf.output('blob');
+                html2canvas(content, { width: width, height: height }).then((canvas) => {
+                    let base64image = canvas.toDataURL('image/png');
+                    let pdf = new jsPDF('p', 'pt', 'a4');
+                    pdf.addImage(base64image, 'PNG', -150, 25, width, height);
 
-                // Create a blob URL for the PDF
-                var pdfUrl = URL.createObjectURL(pdfBlob);
+                    var pdfBlob = pdf.output('blob');
 
-                // Open the PDF in a new browser window/tab
-                window.open(pdfUrl, '_blank');
+                    var pdfUrl = URL.createObjectURL(pdfBlob);
 
-                // pdf.save('pay.pdf');
-            });
+                    window.open(pdfUrl, '_blank');
+                });
 
-            pdfWidth.style.width = "100vw";
+                pdfWidth.style.width = "100vw";
+            }
+            else{
+                let width = 1080;
+                let height = 1920;
+
+                html2canvas(content, { width: width, height: height }).then((canvas) => {
+                    let base64image = canvas.toDataURL('image/png');
+                    let pdf = new jsPDF('p', 'pt', 'a4');
+                    pdf.addImage(base64image, 'PNG', 100, 25, width, height);
+
+                    var pdfBlob = pdf.output('blob');
+
+                    var pdfUrl = URL.createObjectURL(pdfBlob);
+
+                    window.open(pdfUrl, '_blank');
+                // pdf.save('
+                <?php 
+                // echo $name; 
+                ?>
+                // pay.pdf');
+
+                });
+            }
             pdfElements.forEach(function (element) {
-                element.style.display = "block";
-            });
+                    element.style.display = "block";
+                });
         });
 
 

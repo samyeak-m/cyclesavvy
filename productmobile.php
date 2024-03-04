@@ -17,9 +17,7 @@ include "header.php";
   include "dbconnect.php";
   $q = "SELECT * FROM tbl_inventory WHERE stk_id = $id";
   $result = mysqli_query($con, $q);
-  $i = 0;
-  while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-    $i++;
+  $row=mysqli_fetch_array($result,MYSQLI_ASSOC);
     echo '
 
 <div class="product-mobile">
@@ -52,7 +50,7 @@ include "header.php";
 					</div>
 				</div>
 			</div>
-      <button type="submit" class="product-book-now-button" onclick="handleBooking(' . $row['stk_id'] . ', ' . $i . ')">
+      <button type="submit" class="product-book-now-button" onclick="handleBooking(' . $row['stk_id'] . ')">
       <h3 class="product-book">Book Now</h3>
       </button>
           </div>
@@ -89,14 +87,13 @@ include "header.php";
 
         </div>
 </div>
-<form id="booking-form ' . $i . '" action="booking.php" method="GET" style="display: none;">
-    <input type="hidden" id="hidden-stk-id-' . $i . '" name="id" value="">
-    <input type="hidden" id="hidden-user-id-' . $i . '" name="user_id" value="">
-    <input type="hidden" id="hidden-booking-date-' . $i . '" name="booking_date" value="">
+<form id="booking-form" action="booking.php" method="GET" style="display: none;">
+    <input type="hidden" id="hidden-stk-id" name="id" value="">
+    <input type="hidden" id="hidden-user-id" name="user_id" value="">
+    <input type="hidden" id="hidden-booking-date" name="booking_date" value="">
 </form>
 </div>
 ';
-  }
 
   ?>
 
@@ -197,27 +194,29 @@ include "header.php";
       }
     });
 
-    function handleBooking(stkId, loopIndex) {
+    function handleBooking(stkId) {
       var bookingDateInput = document.getElementById('date-input').value;
+
 
       var userId = <?php echo isset($_SESSION['u_id']) ? $_SESSION['u_id'] : 'null'; ?>;
 
       if (bookingDateInput) {
-        var bookingDate = bookingDateInput.value;
+        var bookingDate = bookingDateInput;
 
         if (bookingDate === '') {
           alert("Please choose a booking date.");
         } else {
+  
           var confirmation = confirm("Are you sure you want to confirm the booking date?");
 
           if (confirmation) {
             // Populate the form fields
-            document.getElementById('hidden-stk-id-' + loopIndex).value = stkId;
-            document.getElementById('hidden-user-id-' + loopIndex).value = userId;
-            document.getElementById('hidden-booking-date-' + loopIndex).value = bookingDate;
+            document.getElementById('hidden-stk-id').value = stkId;
+            document.getElementById('hidden-user-id').value = userId;
+            document.getElementById('hidden-booking-date').value = bookingDate;
 
             // Submit the form
-            document.getElementById('booking-form ' + loopIndex).submit();
+            document.getElementById('booking-form').submit();
           }
         }
       }
