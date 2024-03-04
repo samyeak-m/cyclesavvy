@@ -7,11 +7,12 @@ $email=$_POST['email'];
 $password=$_POST['password'];
 $phone=$_POST['phone'];
 $address=$_POST['address'];
+$edit="edit";
 
 include "../dbconnect.php";
 
-$stmt = $con->prepare("INSERT INTO `tbl_admin` (`name`, `email`, `password`, `phone`, `address`) VALUES (?, ?, ?, ?, ?)");
-    $stmt->bind_param("sssss", $name, $email, $password, $phone, $address);
+$stmt = $con->prepare("INSERT INTO `tbl_admin` (`name`, `email`, `password`, `phone`, `address`,`permission`) VALUES (?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssssss", $name, $email, $password, $phone, $address,$edit);
     $result = $stmt->execute();
 
     if ($result) {

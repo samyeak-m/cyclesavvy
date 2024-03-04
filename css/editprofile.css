@@ -81,6 +81,7 @@ span{
 
     .container{
         margin-inline:25px;
+        max-width: 75vw;
     }
 
     input[type="text"],
@@ -89,5 +90,7 @@ span{
   input[type="password"] {
     width: 275px;
   }
+
+
 
   }

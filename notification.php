@@ -62,9 +62,9 @@ if (!$fetchNotificationsResult) {
 
                         ?>
                         <div class="sec">
-                            <!-- <div class="profCont">
-                                <img class="profile" src="<?php echo $cyclePhoto; ?>">
-                            </div> -->
+                            <div class="profCont">
+                                <img class="profile" src="photo/<?php echo $cyclePhoto; ?>" onerror="src='photo/user.png'">
+                            </div>
                             <div class="txt">
                                 <?php echo "$cycleName has been booked on $bookingDate."; ?>
                             </div>

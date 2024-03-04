@@ -14,9 +14,11 @@ $row = $result->fetch_assoc();
 
 if ($row) {
     if ($password===$row['password']) {
+      $edit = $row['permission'];
       $adminname = $row['name'];
       $id = $row['a_id'];
       session_start();
+      $_SESSION['edit'] = $edit;
       $_SESSION['name'] = $adminname;
       $_SESSION['a_id'] = $id;
       header("Location: index.php");

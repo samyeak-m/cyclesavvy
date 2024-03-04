@@ -1,5 +1,5 @@
 <?php
-$currentPage = 'notification';
+$currentPage = 'booking';
 include("header.php");
 if (isset($_SESSION['u_id'])) {
     $userId = $_SESSION['u_id'];}
@@ -28,7 +28,6 @@ if(isset($_POST['delete_booking'])){
     ti.stk_id,
     ti.name AS cycle_name,
     ti.price AS cycle_price,
-    ti.description AS cycle_description,
     ti.photo AS cyclephoto,
     tb.username AS user
 FROM 
@@ -55,7 +54,7 @@ if (!$fetchNotificationsResult) {
         <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
-            <title>Notifications</title>
+            <title>Booking</title>
             <style>  
                 <?php include "css/notification.css"; ?> 
             </style>
@@ -64,7 +63,7 @@ if (!$fetchNotificationsResult) {
             <div class="nothead">
                 <div class="notbody">        
                     <div class="nottitle">
-                        <h1>Notifications</h1>
+                        <h1>Booking</h1>
                     </div>
 
                     <?php
@@ -76,9 +75,9 @@ if (!$fetchNotificationsResult) {
                         $cycleUser = $notificationData['user'];
                         ?>
                         <div class="sec">
-                            <!-- <div class="profCont">
-                                <img class="profile" src="<?php echo $packagephoto; ?>">
-                            </div> -->
+                            <div class="profCont">
+                                <img class="profile" src="photo/<?php echo $cyclePhoto; ?>" onerror="src='photo/user.png'">
+                            </div>
                             <div class="txt">
                                 <?php echo "$cyclename has been booked on $bookingDate by $cycleUser."; ?>
                     </div>
