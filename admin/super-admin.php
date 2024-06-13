@@ -17,13 +17,13 @@
                 <span class="close" onclick="closeModal()">&times;</span>
                 
                 
-                    <form id="addAdminForm">
+                    <form id="addAdminForm" method="post" action="saveadmin.php" enctype="multipart/form-data">
                     <h2>Add Admin</h2>
-                    <input type="text" id="adminName" placeholder="Name" required>
-                    <input type="text" id="adminEmail" placeholder="Email" required>
-                    <input type="password" id="adminPassword" placeholder="Password" required>
-                    <input type="text" id="adminPhone" placeholder="Phone" required>
-                    <input type="text" id="adminAddress" placeholder="Address" required>
+                    <input type="text" id="adminName" name="name" placeholder="Name" required>
+                    <input type="text" id="adminEmail" name="email" placeholder="Email" required>
+                    <input type="password" id="adminPassword" name="password" placeholder="Password" required>
+                    <input type="text" id="adminPhone" name="phone" placeholder="Phone" required>
+                    <input type="text" id="adminAddress" name="address" placeholder="Address" required>
                     <button class="saveadmin" onclick="saveAdmin()">Save Admin</button>
                     </form>
 
@@ -31,7 +31,6 @@
         </div>
         <div class="admin-table">
             <table>
-                <!-- Table headers -->
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -42,22 +41,24 @@
                     </tr>
                 </thead>
                 <tbody id="adminList">
-                    <!-- Example Admin Details -->
-                    <tr>
-                        <td class="admin-name"><p>John Doe</p></td>
-                        <td class="admin-email"><p>john.doe@example.com</p></td>
-                        <td class="admin-phone"><p>123-456-7890</p></td>
-                        <td class="admin-address"><p>123 Main St, City</p></td>
-                        <td><button class="delete-admin updatebtn" onclick="deleteAdmin(this)">Delete</button></td>
-                    </tr>
-                    <tr>
-                        <td class="admin-name"><p>ram Doe</p></td>
-                        <td class="admin-email"><p>ram.doe@example.com</p></td>
-                        <td class="admin-phone"><p>123-456-7890</p></td>
-                        <td class="admin-address"><p>123 Main St, City</p></td>
-                        <td><button class="delete-admin updatebtn" onclick="deleteAdmin(this)">Delete</button></td>
-                    </tr>
-                    <!-- End of Example Admin Details -->
+                <?php
+
+include "../dbconnect.php";
+$q="select * from tbl_admin";
+$result=mysqli_query($con,$q);
+    while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
+        echo "<tr>";
+
+        
+        echo "<td>{$row['name']}</td>";
+        echo "<td>{$row['email']}</td>";
+        echo "<td>{$row['phone']}</td>";
+        echo "<td>{$row['address']}</td>";
+        echo "<td><a class='delete-product updatebtn' onclick=\"return confirm('Are you sure to delete?')\" href='deleteadmin.php?id={$row['a_id']}'>Delete</a></td>";                            
+        echo"</tr>";
+    }
+
+    ?>
                 </tbody>
             </table>
         </div>

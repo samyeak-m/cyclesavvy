@@ -9,34 +9,29 @@
 <body>
   <div class="login-form">
     <h2>Login</h2>
-    <form>
+    <form action="logincheck.php" method="post">
       <label for="email">Email:</label>
-      <input type="email" id="email" required>
+      <input type="email" name="email" id="email" required>
 
       <label for="password">Password:</label>
-      <input type="password" id="password" required>
+      <input type="password" name="password" id="password" required>
 
-      <button type="submit">Login</button>
+       <?php
+        if (isset($_GET['error'])) {
+            $error = $_GET['error'];
+            echo '<div class="error">' . $error . '</div>';
+            echo '<script>window.history.replaceState(null, null, window.location.href.split("?")[0]);</script>';
+        }
+        if (isset($_GET['success'])) {
+            $successMessage = $_GET['success'];
+            echo '<div class="success">' . $successMessage . '</div>';
+            echo '<script>window.history.replaceState(null, null, window.location.href.split("?")[0]);</script>';
+        }
+      ?>
+
+      <button>Login</button>
     </form>
   </div>
-  <script>
-    document.querySelector('form').addEventListener('submit', function(event) {
-  event.preventDefault(); // Prevent form submission (for demonstration purposes)
-
-  // Get the user's email and password
-  const email = document.getElementById('email').value;
-  const password = document.getElementById('password').value;
-
-  // Perform simple validation (you can add more complex validation as needed)
-  if (email.trim() === '' || password.trim() === '') {
-    alert('Please enter both email and password.');
-    return;
-  }
-
-  // Perform login process here (for demonstration purposes, we just show an alert)
-  alert(`Login successful!\nEmail: ${email}`);
-});
-
-  </script>
+  
 </body>
 </html>

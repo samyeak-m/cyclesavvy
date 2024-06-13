@@ -7,8 +7,8 @@ function validateField(fieldName) {
 
     switch (fieldName) {
         case "name":
-            if (field.value.length < 8) {
-                errorDiv.innerHTML = "Name must be at least 8 characters long.";
+            if (field.value.length < 8 && field.value.includes("#")) {
+                errorDiv.innerHTML = "Name must be at least 8 characters long and can't use #.";
                 field.classList.add("input-error");
             }
             break;
@@ -58,6 +58,7 @@ function validateField(fieldName) {
             break;
     }
 }
+
 
 // Function to validate the entire form
 function validateForm() {

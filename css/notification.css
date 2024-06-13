@@ -103,7 +103,7 @@
 
 .profCont img{
     width: auto;
-    height:max(70px);
+    height:max(60px);
     padding: 0 7px;
     margin-top: 3px;
     aspect-ratio: 3/3;
@@ -113,7 +113,7 @@
   
 .profile{
     clip-path: circle(50% at 50% 50%);
-    width: 75px;
+    width: 5px;
     float: left;
     z-index: 0;
 }
@@ -122,7 +122,7 @@
     vertical-align: top;
     font-size: 1.25rem;
     color: rgb(79, 79, 79);
-    padding: 5px 10px 0px 105px;
+    padding: 5px 10px 0px 15px;
 }
 
 .sub{
@@ -140,6 +140,24 @@
     background-color:rgb(223, 223, 223,40%);
 }
 
+.updatebtn{
+    color: white;
+    border-radius: 8px;
+    padding: 8px 10px;
+    cursor: pointer;
+
+}
+
+.delete-product{
+    background-color: red;
+    border: 2px solid red;
+}
+
+.delete-product:hover{
+    background-color: var(--textcolor);
+    border-color: var(--textcolor);
+}
+
 @media only screen and (width<=780px) {
  
     .nothead{
@@ -155,4 +173,13 @@
     .notpar > h4::after{
           margin: -1px 0 ;
     }
+    .updatebtn{
+        font-size: 10px;
+        font-weight: 600;
+        padding: 5px 7px;
+    margin-top: 25px;
+
+    }
+
+    
 }

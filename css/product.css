@@ -8,11 +8,22 @@
 .product {
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-between;
-  width: 80vw;
+  justify-content: start;
+  width: 70vw;
   gap: 2rem;
   row-gap: 4rem;
 }
+/* 
+.contan-product{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: start;
+  width:97.66%;
+  gap: 2rem;
+  row-gap: 4rem;
+  
+
+} */
 
 figure {
   height: 200px;
@@ -79,11 +90,14 @@ figure:last-child {
 }
 
 .product-photo {
-  width: 50%;
+  flex-basis:25%;
+  display: flex;
+  width: 100%;
   max-width: 450px;
   height: auto;
   justify-content: start;
   margin-inline: 0 2rem;
+  margin: 0 20px 2rem 1rem;
 }
 
 .product-photo > img {
@@ -94,11 +108,16 @@ figure:last-child {
   mix-blend-mode: multiply;
 }
 
+.product-wapper{
+  flex-basis:65%;
+  display: flex;
+  justify-content: center;
+}
+
 .product-detail {
   display: flex;
   flex-flow: column nowrap;
-  justify-content: end;
-  align-items: start;
+  
 }
 
 .product-head {
@@ -188,6 +207,7 @@ figure:last-child {
   border-radius: 12px;
   color: white;
   padding: 5px 10px;
+  cursor: pointer;
 }
 
 .product-booking button[type="submit"]:hover,
@@ -402,6 +422,7 @@ border-color: rgba(88,89,91,100%);
       gap: 1rem;
       row-gap: 2rem;
   }
+
 
   figure {
       padding: 11px;

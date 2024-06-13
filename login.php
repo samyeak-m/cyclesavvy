@@ -14,29 +14,33 @@
 
 			<div class="signup">
                 
-				<form method="post" action="#correct" onsubmit="return validateForm()">
+			<form method="post" id="myform" action="saveuser.php" enctype="multipart/form-data" onsubmit="return validateForm()">
 					<label for="chk" aria-hidden="true">Sign up</label>
 					
-					<input type="input" name="txt" placeholder="Name" id="name" oninput="clearError('name')" class="input-clear">
+					<input type="input" name="name" placeholder="Name" id="name" oninput="clearError('name')" class="input-clear" >
 					<div id="nameError" class="error"></div>
 					
-					<input type="input" name="email" placeholder="Email" id="email" oninput="clearError('email')" class="input-clear">
+					<input type="input" name="email" placeholder="Email" id="email" oninput="clearError('email')" class="input-clear" >
 					<div id="emailError" class="error"></div>
 					
-					<input type="password" name="pswd" placeholder="Password" id="password" oninput="clearError('password')" class="input-clear">
+					<input type="tel" name="phone" placeholder="Phone" id="phone" oninput="clearError('phone')" class="input-clear" >
+					<div id="phoneError" class="error"></div>
+
+					<input type="password" name="password" placeholder="Password" id="password" oninput="clearError('password')" class="input-clear" >
 					<div id="passwordError" class="error"></div>
 					
-					<button type="submit" value="Submit" id="submitBtn" class="signupbtn" >Sign up</button>
+					<button id="submitBtn">Sign up</button>
 				</form>
 			</div>
 
 			<div class="login" action="post">
-				<form>
+			<form action="logincheck.php" method="post">
+
 					<label for="chk" aria-hidden="true">Login</label>
 					
-					<input type="input" name="email" placeholder="Email" required="">
+					<input type="email" name="email" class="form_field" placeholder="Email" required/>
 					
-					<input type="password" name="pswd" placeholder="Password" required="">
+					<input type="password" name="password" id="log_password"class="form_field" placeholder="Password" required/>
 					
 					<button class="loginbtn">Login</button>
 				</form>

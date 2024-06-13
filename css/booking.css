@@ -1,0 +1,122 @@
+*,body{
+    margin: 0;
+    padding: 0;
+    scroll-behavior:smooth;
+    width: 100vw;
+    overflow: hidden auto;
+    
+}
+
+/* scorllbar */
+*::-webkit-scrollbar
+{
+  display: none;
+}
+
+a,
+button,
+input[type="submit"],
+input[type="button"],
+input[type="reset"],
+label,
+img,
+.msgBtn,
+.notBtn,
+.puBtn,
+.date-btn {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none; 
+  -moz-user-select: none; 
+  -ms-user-select: none; 
+  user-select: none;
+}
+
+.databook{
+  padding-top: 50px;
+  display: flex;
+  width: 100vw;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+
+.databook-con{
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  width: 30vw;
+}
+
+.image-con{
+  display: flex;
+  justify-content: center;
+  height: 290px;
+  width: 500px;
+}
+
+.image-prod{
+  height: 100%;
+  width: 100%;
+  object-fit: scale-down;
+  aspect-ratio:1/2 ;
+}
+
+.detail-prod{
+  margin-block: 15px;
+  width: 27vw;
+  padding: 16px;
+  background-color: #f1f1f1;
+  border-radius: 18px;
+}
+
+.detail-prod > p{
+  margin-block: 8px;
+  width: 26vw;
+  padding: 8px;
+  font-size: 1.5em;
+  font-weight: 600;
+  font-family: 'Poppins';
+  background-color: #fff;
+  border-radius: 8px;
+  color: rgba(0, 128, 0,1);
+}
+
+.paymethod{
+  display: flex;
+    justify-content: center;
+    margin: 15px;
+}
+
+.paymethod > button{
+  width: 150px;
+  border-radius: 8px;
+  padding: 16px;
+  font-size: 16px;
+  font-weight: 600;
+  border: transparent;
+  background-color: rgba(0, 128, 0,1);
+  color: #fff;
+  margin-inline: 15px;
+  cursor: pointer;
+}
+
+.paymethod > button:hover{
+  background-color: #f1f1f1;
+  color: rgba(0, 128, 0,0.8);
+}
+
+@media only screen and (width<=780px) {
+
+  .databook-con{
+  width: 100vw;
+  }
+
+.detail-prod{
+  width: 85vw;
+}
+
+.detail-prod > p{
+  width: 80vw;
+}
+
+}

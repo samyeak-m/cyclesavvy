@@ -1,141 +1,86 @@
 <?php
 $currentPage = 'notification';
 include("header.php");
-?>
 
-<!DOCTYPE html>
-<html lang="en">
-	<meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
-<head>
-<style>  
-        <?php include "css/notification.css"; ?>
-</style>
-</head>
-<body>
-    <div class="nothead">
-        <div class="notbody">        
-            <div class="nottitle">
-                <h1>Notifications</h1>
-            </div>
+include "dbconnect.php"; // Include database connection
 
-            <div class="nottext">
-                    <a href="#all" class="notrtext notpar active"><h4>All</h4></a>
-                <a href="#unread" class="notrtext notpar"><h4>Unread</h4></a>
-            </div>
-                
-            <div class = "sec new">
-                <a href = "#">
-                <div class = "profCont">
-                    <img class = "profile" src = "photo/user.png">
-                </div>
-                <div class = "txt">James liked your post: "Pure css notification box"</div>
-                <div class = "txt sub">11/7 - 2:30 pm</div>
-                </a>
-            </div>
+if (isset($_SESSION['u_id'])) {
+    $userId = $_SESSION['u_id'];
+
+    // Fetch notifications for the user from the database
+    $fetchNotificationsQuery = "
+        SELECT 
             
-            <div class = "sec new">
-					   <a href = "#">
-					   <div class = "profCont">
-					   <img class = "profile" src = "photo/user.png">
-						</div>
-					   <div class = "txt">James liked your post: "Pure css notification box"</div>
-					  <div class = "txt sub">11/7 - 2:30 pm</div>
-					   </a>
-					</div>
+            tb.cyclename,
+            tb.date AS booking_date,
+            ti.stk_id,
+            ti.name AS cycle_name,
+            ti.price AS cycle_price,
+            ti.description AS cycle_description,
+            ti.photo AS cyclephoto
+        FROM 
+            tbl_booking tb
+        JOIN 
+            tbl_inventory ti ON tb.stock_id = ti.stk_id
+        WHERE 
+            tb.client_id = '$userId'
+        ORDER BY 
+            tb.date DESC
+    ";
 
-					<div class = "sec new">
-						<a href = "#">
-						<div class = "profCont">
-						<img class = "profile" src = "photo/user.png">
-						 </div>
-						<div class = "txt">James liked your post: "Pure css notification box"</div>
-					   <div class = "txt sub">11/7 - 2:30 pm</div>
-						</a>
-					 </div>
-					 
-					 <div class = "sec">
-					   <a href = "#">
-					   <div class = "profCont">
-					   <img class = "profile" src = "photo/user.png">
-						</div>
-					   <div class = "txt">Debra liked your post: "Pure css notification box"</div>
-					  <div class = "txt sub">11/5 - 10:20 am</div>
-					   </a>
-					</div>
+    $fetchNotificationsResult = mysqli_query($con, $fetchNotificationsQuery);
 
-					<div class = "sec">
-						<a href = "#">
-						<div class = "profCont">
-						<img class = "profile" src = "photo/user.png">
-						 </div>
-						<div class = "txt">Debra liked your post: "Pure css notification box"</div>
-					   <div class = "txt sub">11/5 - 10:20 am</div>
-						</a>
-					 </div>
+if (!$fetchNotificationsResult) {
+    echo "<script>alert('Query error: ' .' mysqli_error($con); '. )</script>";
+    exit;
+}
 
-					<div class = "sec">
-						<a href = "#">
-						<div class = "profCont">
-						<img class = "profile" src = "photo/user.png">
-						 </div>
-						<div class = "txt">Debra liked your post: "Pure css notification box"</div>
-					   <div class = "txt sub">11/5 - 10:20 am</div>
-						</a>
-					 </div>
+    if ($fetchNotificationsResult) {
+        ?>
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+            <title>Notifications</title>
+            <style>  
+                <?php include "css/notification.css"; ?>
+            </style>
+        </head>
+        <body>
+            <div class="nothead">
+                <div class="notbody">        
+                    <div class="nottitle">
+                        <h1>Notifications</h1>
+                    </div>
 
-                     <div class = "sec new">
-					   <a href = "#">
-					   <div class = "profCont">
-					   <img class = "profile" src = "photo/user.png">
-						</div>
-					   <div class = "txt">James liked your post: "Pure css notification box"</div>
-					  <div class = "txt sub">11/7 - 2:30 pm</div>
-					   </a>
-					</div>
+                    <?php
+                    while ($notificationData = mysqli_fetch_assoc($fetchNotificationsResult)) {
+                        $cycleName = $notificationData['cyclename'];
+                        $bookingDate = $notificationData['booking_date'];
+                        $cyclePhoto = $notificationData['cyclephoto'];
 
-					<div class = "sec new">
-						<a href = "#">
-						<div class = "profCont">
-						<img class = "profile" src = "photo/user.png">
-						 </div>
-						<div class = "txt">James liked your post: "Pure css notification box"</div>
-					   <div class = "txt sub">11/7 - 2:30 pm</div>
-						</a>
-					 </div>
-					 
-					 <div class = "sec">
-					   <a href = "#">
-					   <div class = "profCont">
-					   <img class = "profile" src = "photo/user.png">
-						</div>
-					   <div class = "txt">Debra liked your post: "Pure css notification box"</div>
-					  <div class = "txt sub">11/5 - 10:20 am</div>
-					   </a>
-					</div>
-
-					<div class = "sec">
-						<a href = "#">
-						<div class = "profCont">
-						<img class = "profile" src = "photo/user.png">
-						 </div>
-						<div class = "txt">Debra liked your post: "Pure css notification box"</div>
-					   <div class = "txt sub">11/5 - 10:20 am</div>
-						</a>
-					 </div>
-
-					<div class = "sec">
-						<a href = "#">
-						<div class = "profCont">
-						<img class = "profile" src = "photo/user.png">
-						 </div>
-						<div class = "txt">Debra liked your post: "Pure css notification box"</div>
-					   <div class = "txt sub">11/5 - 10:20 am</div>
-						</a>
-					 </div>
-
-        </div>
-    </div>
-
-</body>
-</html>
+                        ?>
+                        <div class="sec">
+                            <div class="profCont">
+                                <img class="profile" src="photo/<?php echo $cyclePhoto; ?>" onerror="src='photo/user.png'">
+                            </div>
+                            <div class="txt">
+                                <?php echo "$cycleName has been booked on $bookingDate."; ?>
+                            </div>
+                        </div>
+                        <?php
+                    }
+                    ?>
+                </div>
+            </div>
+        </body>
+        </html>
+        <?php
+    } else {
+        echo "<script>alert('Error fetching notifications: " . mysqli_error($con) . "')</script>";
+    }
+} else {
+    echo "<script>alert('User not logged in.')</script>";
+}
+?>
