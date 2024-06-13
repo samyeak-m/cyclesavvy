@@ -23,12 +23,13 @@ function validateForm() {
     emailInput.classList.remove("input-error");
     passwordInput.classList.remove("input-error");
 
-    if (name == '') {
-        errorMessage += "Name cannot be blank.<br>";
+    if (name.trim() === '' || name.includes('#')) {
+        errorMessage += "Name cannot be blank & can't contain '#'.<br>";
         nameError.innerHTML = errorMessage;
         nameInput.classList.add("input-error");
         return false;
     }
+    
 
     // Validate email format (contains '@' and '.')
     var at = email.indexOf("@");

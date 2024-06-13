@@ -14,13 +14,13 @@ $row = $result->fetch_assoc();
 
 if ($row) {
     $username = $row['name'];
-    $id=$row['u_id'];
+    $id = $row['u_id'];
     $token = bin2hex(random_bytes(32));
     session_start();
     $_SESSION['auth_token'] = $token;
-    $_SESSION['name']=$username;
+    $_SESSION['name'] = $username;
     $_SESSION['u_id'] = $id;
-        header("Location: product.php");
+    header("Location: product.php");
     exit();
 } else {
     header("Location: index.php?error=");

@@ -7,7 +7,7 @@ if (!isset($_SESSION['edit'])) {
     header('Location:login.php');
 
 } else {
-    $adminname = $_SESSION['name'];
+    $adminname = $_SESSION['a_name'];
 
 }
 

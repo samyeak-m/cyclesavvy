@@ -66,7 +66,9 @@ if (isset($_GET['error'])) {
             <div class="right" id="right">
 
                 <a class="img change home <?php if ($currentPage === 'home')
-                    echo 'active'; ?>" href="index.php" <?php if($displayAuser=="none"){echo 'style="margin-right:15px"';}?>>
+                    echo 'active'; ?>" href="index.php" <?php if ($displayAuser == "none") {
+                          echo 'style="margin-right:15px"';
+                      } ?>>
                     <img src="photo/home_green.png" class="img-top" alt="Home">
                     <img src="photo/home_grey.png" alt="Home">
                 </a>
@@ -553,7 +555,7 @@ if (isset($_GET['error'])) {
             }
 
             function onClick() {
-                
+
                 if (width > 780) {
                     if (box.classList.contains("active") == false) {
                         box.classList.add("active");
@@ -567,7 +569,7 @@ if (isset($_GET['error'])) {
                         }
                     });
                 } else {
-                    if (login=="false"){
+                    if (login == "false") {
                         console.log("login false");
                         window.location.href = "login.php";
                     }
@@ -577,13 +579,13 @@ if (isset($_GET['error'])) {
                 }
             }
 
-                notBtn.addEventListener("click", onClick);
+            notBtn.addEventListener("click", onClick);
 
-                window.addEventListener("resize", function () {
-                    notBtn.removeEventListener("click", onClick);
-                    onResize();
-                    notBtn.addEventListener("click", onClick);
-                });
+            window.addEventListener("resize", function () {
+                notBtn.removeEventListener("click", onClick);
+                onResize();
+                notBtn.addEventListener("click", onClick);
+            });
         });
 
         // user dropdown end

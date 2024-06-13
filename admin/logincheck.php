@@ -19,7 +19,7 @@ if ($row) {
       $id = $row['a_id'];
       session_start();
       $_SESSION['edit'] = $edit;
-      $_SESSION['name'] = $adminname;
+      $_SESSION['a_name'] = $adminname;
       $_SESSION['a_id'] = $id;
       header("Location: index.php");
       exit();
